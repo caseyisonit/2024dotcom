@@ -1,0 +1,31 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "files.autoSave": "onFocusChange",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.fixAll.stylelint": "explicit",
+      "source.fixAll.prettier": "explicit"
+    },
+    "eslint.validate": ["javascript", "javascriptreact", "html", "typescript", "typescriptreact"],
+    "eslint.nodeEnv": "development",
+    "eslint.workingDirectories": [{ "mode": "auto" }],
+    "stylelint.enable": true,
+    "css.validate": false,
+    "scss.validate": false,
+    "editor.rulers": [80, 120],
+    "files.eol": "\n",
+    "cSpell.words": ["classname", "csstype"],
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#332C2C",
+      "titleBar.activeBackground": "#473D3D",
+      "titleBar.activeForeground": "#FBFAFA"
+    }
+  }
+}
