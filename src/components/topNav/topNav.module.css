@@ -1,0 +1,29 @@
+.appBar {
+  background-color: #F3FFB6;
+  box-shadow: none;
+}
+
+.appBarHeading {
+  font-family: var(--danfo-font);
+  font-size: 2.5rem;
+  margin: 0;
+  color: #99621E;
+  text-decoration: none;
+  margin: 1rem 0;
+}
+
+.navLinksBox {
+  padding: 0 2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.navLink {
+  color: #fff;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+}

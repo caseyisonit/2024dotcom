@@ -1,0 +1,49 @@
+.landingGraphic {
+  width: 100vw;
+  height: auto;
+  position: relative;
+  margin: 2rem auto;
+}
+
+.content {
+  width: 50;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 34%;
+  z-index: 2;
+  display: flex;
+  flex-flow: column nowrap;
+
+}
+
+.heading {
+  font-family: NationalForestScript;
+  font-weight: 400;
+  font-size: 8vw;
+  line-height: 1;
+  display: inline;
+  color: var(--cambridge-blue);
+  margin: .5em 0
+}
+
+.tagline {
+  font-family: NationalForestPrintRegular;
+  font-size: 2.5vw;
+  line-height: 1;
+  color: var(--mindaro);
+  margin: .5em 1em;
+  text-align: center;
+}
+
+.glyph {
+  font-family: NationalForestExtras;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0rem;
+  left: 25%;
+  font-size: 50vw;
+  line-height: .8;
+  color: var(--golden-brown);
+}
