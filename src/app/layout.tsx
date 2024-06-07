@@ -1,11 +1,11 @@
 // use client
 
 import type { Metadata } from "next";
-import TopNav from "@/components/topNav/topNav";
-import { StyledEngineProvider } from "@mui/material/styles";
+import { montserrat } from "./nextFonts";
+
 
 import "./normalize.css";
-import "./fonts.css";
+import "./webfonts.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,12 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={montserrat.variable}>
       <body>
-        <StyledEngineProvider injectFirst>
-          {/* <TopNav /> */}
           {children}
-        </StyledEngineProvider>
       </body>
     </html>
   );

@@ -5,7 +5,7 @@
   background-color: #fcffeb;
   background-image: url(../assets/background.svg);
   background-repeat: repeat;
-  background-size: 50%;
+  background-size: 150%;
   background-blend-mode: multiply;
 }
 
@@ -16,7 +16,7 @@
   --golden-brown: #99621e;
   --persian-orange: #d38b5d;
   --cambridge-blue: #739e82;
-  --cal-poly-green: #2c5530
+  --cal-poly-green: #2c5530;
   --gray-50: #ffffff;
   --gray-100: #d0d0d0;
   --gray-200: #afafaf;
@@ -46,11 +46,37 @@ body {
 }
 
 body {
-  font-family: NationalForestPrintRegular;
+  font-family: var(--montserrat-font);
   color: var(--text-color);
+}
+
+h1 {
+  font-family: NationalForestScript;
+  font-weight: 400;
+}
+
+h2 {
+  font-family: NationalForestPrintBold;
+  line-height: 1;
+}
+
+h3, h4, h5, h6 {
+  font-family: NationalForestPrintRegular;
+  line-height: 1;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    background-size: 100%;
+  } 
+}
+@media screen and (min-width: 1024px) {
+  :root {
+    background-size: 50%;
+  } 
 }
