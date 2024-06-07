@@ -31,6 +31,7 @@ export default function Home() {
           something amazing together!
         </p>
       </section>
+      <a className={styles.link} href="https://www.linkedin.com/in/caseyeickhoff/" target="blank">View my LinkedIn</a>
     </main>
   );
 }
