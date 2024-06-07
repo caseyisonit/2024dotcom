@@ -8,7 +8,7 @@ export default function Home() {
       <section className={styles.intro}>
         <h1>Casey Eickhoff</h1>
         <h2>Senior Software Engineer</h2>
-        <h3>Located in the Rocky Moutains</h3>
+        <h3>Located in the Rocky Mountains</h3>
       </section>
       {/* <LandingGraphic /> */}
       <section className={styles.summary}>
