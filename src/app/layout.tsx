@@ -2,7 +2,7 @@
 
 import type { Metadata } from "next";
 import { montserrat } from "./nextFonts";
-
+import { Analytics } from "@vercel/analytics/react";
 
 import "./normalize.css";
 import "./webfonts.css";
@@ -22,7 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={montserrat.variable}>
       <body>
-          {children}
+        {children}
+        <Analytics />
       </body>
     </html>
   );
