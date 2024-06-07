@@ -1,0 +1,55 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3867246, 2020-12-16T11:57:38-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: undefined by undefined
+ * URL: https://www.myfonts.comundefined
+ * Copyright: Copyright © 2024 Monotype Imaging Inc. All rights reserved.
+ *
+ * Webfont: undefined by undefined
+ * URL: https://www.myfonts.comundefined
+ * Copyright: Copyright © 2024 Monotype Imaging Inc. All rights reserved.
+ *
+ * Webfont: undefined by undefined
+ * URL: https://www.myfonts.comundefined
+ * Copyright: Copyright © 2024 Monotype Imaging Inc. All rights reserved.
+ *
+ * Webfont: undefined by undefined
+ * URL: https://www.myfonts.comundefined
+ * Copyright: Copyright © 2024 Monotype Imaging Inc. All rights reserved.
+ *
+ * Webfont: undefined by undefined
+ * URL: https://www.myfonts.comundefined
+ * Copyright: Copyright © 2024 Monotype Imaging Inc. All rights reserved.
+ * 
+ * © 2024 MyFonts Inc. */
+
+
+  
+@font-face {
+  font-family: "NationalForestPrintBold";
+  src: url('../assets/webFonts/NationalForestPrintBold/font.woff2') format('woff2'), url('../assets/webFonts/NationalForestPrintBold/font.woff') format('woff');
+}
+@font-face {
+  font-family: "NationalForestPrintThin";
+  src: url('../assets/webFonts/NationalForestPrintThin/font.woff2') format('woff2'), url('../assets/webFonts/NationalForestPrintThin/font.woff') format('woff');
+}
+@font-face {
+  font-family: "NationalForestExtras";
+  src: url('../assets/webFonts/NationalForestExtras/font.woff2') format('woff2'), url('../assets/webFonts/NationalForestExtras/font.woff') format('woff');
+}
+@font-face {
+  font-family: "NationalForestPrintRegular";
+  src: url('../assets/webFonts/NationalForestPrintRegular/font.woff2') format('woff2'), url('../assets/webFonts/NationalForestPrintRegular/font.woff') format('woff');
+}
+@font-face {
+  font-family: "NationalForestScript";
+  src: url('../assets/webFonts/NationalForestScript/font.woff2') format('woff2'), url('../assets/webFonts/NationalForestScript/font.woff') format('woff');
+}
+

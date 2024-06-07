@@ -1,95 +1,37 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import LandingGraphic from "@/components/landingGraphic/landingGraphic";
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
+      <section className={styles.intro}>
+        <h1>Casey Eickhoff</h1>
+        <h2>Senior Software Engineer</h2>
+        <h3>Located in the Rocky Moutains</h3>
+      </section>
+      {/* <LandingGraphic /> */}
+      <section className={styles.summary}>
+        <h2>Howdy!</h2>
         <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
+          I’m a Senior Software Engineer with over a decade of
+          experience in UX design, specializing in design systems and
+          accessibility.
         </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+        <p>
+          I love blending engineering and design to create
+          products that are not only functional but also user-friendly and
+          delightful to use. I have a knack for leading and mentoring teams to
+          achieve fantastic results and make a real impact. Let’s create
+          something amazing together!
+        </p>
+        <p>
+          I have a knack for leading and mentoring teams to
+          achieve fantastic results and make a real impact. Let’s create
+          something amazing together!
+        </p>
+      </section>
+      <a className={styles.link} href="https://www.linkedin.com/in/caseyeickhoff/" target="blank">View my LinkedIn</a>
     </main>
   );
 }
