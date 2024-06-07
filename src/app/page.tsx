@@ -21,9 +21,7 @@ export default function Home() {
         <p>
           I love blending engineering and design to create
           products that are not only functional but also user-friendly and
-          delightful to use. I have a knack for leading and mentoring teams to
-          achieve fantastic results and make a real impact. Let’s create
-          something amazing together!
+          delightful to use.
         </p>
         <p>
           I have a knack for leading and mentoring teams to
