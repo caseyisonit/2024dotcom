@@ -12,7 +12,10 @@
     "@adobe/spectrum-wc": "2.0.0-beta.7",
     "@adobe/spectrum-wc-icons": "2.0.0-beta.7",
     "@vercel/analytics": "^1.3.1",
+    "github-slugger": "2.0.0",
+    "gray-matter": "4.0.3",
     "next": "15.5.29",
+    "next-mdx-remote": "6.0.0",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },
