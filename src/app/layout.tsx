@@ -10,13 +10,18 @@ import "@/styles/site.css";
 
 import { SiteHeader } from "@/components/SiteHeader";
 import { themeBootScript } from "@/components/ThemeToggle";
+import { site } from "@/content/site";
 import { SwcRegistry } from "@/swc/registry";
 import { fontVariables } from "@/styles/fonts";
 
 export const metadata: Metadata = {
-  title: "Casey Eickhoff - Senior Software Engineer",
-  description:
-    "Personal Portfolio for Casey Eickhoff as a Senior Frontend Software Engineer, specializing in React, TypeScript, Node.js, Design Systems and Accessibility Web Compliance.",
+  metadataBase: new URL(site.url),
+  title: { default: `${site.author} · ${site.logo.word}${site.logo.tld}`, template: `%s · ${site.author}` },
+  description: site.description,
+  authors: [{ name: site.author, url: site.url }],
+  alternates: { canonical: "/", types: { "application/rss+xml": [{ url: "/rss.xml", title: `${site.author}: Writing` }] } },
+  openGraph: { type: "website", siteName: `${site.logo.word}${site.logo.tld}`, locale: "en_US", url: "/" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

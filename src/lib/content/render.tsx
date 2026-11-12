@@ -30,7 +30,7 @@ const components = {
       <blockquote>{children}</blockquote>
     </figure>
   ),
-  pre: (props: ComponentPropsWithoutRef<"pre">) => <pre className="code-block" {...props} />,
+  pre: (props: ComponentPropsWithoutRef<"pre">) => <pre className="code-block" tabIndex={0} {...props} />,
   a: ({ href = "", ...props }: ComponentPropsWithoutRef<"a">) => (
     <a href={href} className="swc-Link" {...(href.startsWith("http") ? { rel: "noopener" } : {})} {...props} />
   ),

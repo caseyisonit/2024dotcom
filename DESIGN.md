@@ -103,6 +103,8 @@ About portrait: the same generator (seed `about`) with a cell mask, so shapes on
 
 ## Motion
 
+Rotating text (Home band phrases, footer statement endings) crossfades over 400ms every 6s, only when motion is allowed, and always has Pause/Play (WCAG 2.2.2). Every option shares one grid cell so the layout never jumps. Band controls are large text (≥ 24px) because ink on Artemisia Green is 4.27:1.
+
 Opt-in via `prefers-reduced-motion: no-preference`. Plays once on scroll-in, never loops: turn (rotate 90°, 400ms, `cubic-bezier(0.2, 0.8, 0.2, 1)`), grow (scale from 0, 480ms ease-out, 80ms stagger), settle (tiles fade/scale, 200ms, 50ms stagger).
 
 ## Components

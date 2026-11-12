@@ -5,7 +5,12 @@ import { Headline } from "@/components/Headline";
 import { site } from "@/content/site";
 import { formatTenure, getCurrentRole, getRoles, getYearsByFocus, getYearsWorking, tenureYears, type Role } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Work" };
+export const metadata: Metadata = {
+  title: "Work",
+  description: "20 years across brand, product design, and design systems engineering, from art direction to Adobe’s Spectrum Web Components.",
+  alternates: { canonical: "/work" },
+  openGraph: { url: "/work" },
+};
 
 const yearOf = (iso: string) => iso.slice(0, 4);
 

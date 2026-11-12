@@ -23,6 +23,15 @@ export async function getPosts(): Promise<Post[]> {
   return showDrafts() ? posts : posts.filter((p) => p.status === "published");
 }
 
+/**
+ * One switch for the whole Writing section. False in production until a post
+ * is published (drafts count in dev, previews, or with SHOW_DRAFTS=1). When
+ * false: no Writing routes, nav item, Home writing sections, or RSS link.
+ */
+export async function hasWriting() {
+  return (await getPosts()).length > 0;
+}
+
 export async function getPost(slug: string) {
   return (await getPosts()).find((p) => p.slug === slug);
 }

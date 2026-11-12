@@ -27,7 +27,10 @@ export function Band({ hasWriting }: { hasWriting: boolean }) {
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % phrases.length), INTERVAL_MS);
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % phrases.length),
+      INTERVAL_MS,
+    );
     return () => clearInterval(id);
   }, [paused, phrases.length]);
 
@@ -35,10 +38,18 @@ export function Band({ hasWriting }: { hasWriting: boolean }) {
   const label = `${String(index + 1).padStart(2, "0")} / ${String(phrases.length).padStart(2, "0")}`;
 
   return (
-    <section className="band field" aria-roledescription="carousel" aria-label="Topics">
+    <section
+      className="band field"
+      aria-roledescription="carousel"
+      aria-label="Topics"
+    >
       <div className="band-phrases" aria-live={paused ? "polite" : "off"}>
         {phrases.map((p, i) => (
-          <p key={p.phrase} className="headline headline--heading band-phrase" aria-hidden={i === index ? undefined : true}>
+          <p
+            key={p.phrase}
+            className="headline headline--heading band-phrase"
+            aria-hidden={i === index ? undefined : true}
+          >
             {p.phrase}
           </p>
         ))}
@@ -47,15 +58,27 @@ export function Band({ hasWriting }: { hasWriting: boolean }) {
         <span className="meta" aria-hidden="true">
           {label}
         </span>
-        <swc-action-button quiet size="s" onClick={() => setPaused((p) => !p)} accessible-label={paused ? "Play topics" : "Pause topics"}>
+        <swc-action-button
+          quiet
+          size="s"
+          onClick={() => setPaused((p) => !p)}
+          accessible-label={paused ? "Play topics" : "Pause topics"}
+        >
           {paused ? "Play" : "Pause"}
         </swc-action-button>
         {hasWriting && (
           <>
-            <swc-action-button quiet size="s" onClick={() => setIndex((i) => (i + 1) % phrases.length)}>
+            <swc-action-button
+              quiet
+              size="s"
+              onClick={() => setIndex((i) => (i + 1) % phrases.length)}
+            >
               Next topic
             </swc-action-button>
-            <Link href={topicHref(current.topic)} className="swc-Link band-link">
+            <Link
+              href={topicHref(current.topic)}
+              className="swc-Link band-link"
+            >
               Read the {current.phrase} writing
               <swc-icon-chevron-right size="s"></swc-icon-chevron-right>
             </Link>

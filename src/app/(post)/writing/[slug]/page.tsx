@@ -6,6 +6,7 @@ import { AnchorMenu } from "@/components/AnchorMenu";
 import { Headline } from "@/components/Headline";
 import { PostImage } from "@/components/PostImage";
 import { SiteFooter } from "@/components/SiteFooter";
+import { site } from "@/content/site";
 import { getNextPost, getPost, getPosts, topicSlug } from "@/lib/content";
 import { renderBody } from "@/lib/content/render";
 
@@ -19,7 +20,16 @@ export const dynamicParams = false;
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const post = await getPost((await params).slug);
-  return post ? { title: post.plainTitle, description: post.dek } : {};
+  if (!post) return {};
+  const url = `/writing/${post.slug}`;
+  return {
+    title: post.plainTitle,
+    description: post.dek,
+    alternates: { canonical: url },
+    openGraph: { type: "article", url, publishedTime: post.published, authors: [site.author], section: post.topic },
+    // Drafts are previewable but never indexed.
+    robots: post.status === "draft" ? { index: false, follow: false } : undefined,
+  };
 }
 
 export default async function PostPage({ params }: Params) {

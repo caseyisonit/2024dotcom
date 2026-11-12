@@ -63,7 +63,12 @@
 
 /* Full-width hero: three lines on mobile, two from 768px ("[N] yrs on it."). */
 .work-title {
-  font-size: min(30cqi, 6.25rem);
+  font-size: min(30cqi, 16.875rem);
+}
+
+/* "Casey." (≈3em) fills its column: matches Figma at 390 and 1440. */
+.about-title {
+  font-size: min(31cqi, 18rem);
 }
 
 @media (min-width: 768px) {
@@ -136,6 +141,16 @@
   text-decoration: none;
 }
 
+/* Standalone links (not inline in text) get at least a 24px target (WCAG 2.5.8). */
+.links .swc-Link,
+.panel-list .swc-Link,
+.section-header-aside > .swc-Link,
+.band-link {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 24px;
+}
+
 .panel .swc-Link:hover {
   text-decoration: underline;
 }
@@ -204,31 +219,50 @@
    the longest one and never jumps when it rotates. */
 .band-phrases {
   display: grid;
+  container-type: inline-size;
 }
 
 .band-phrases > * {
   grid-area: 1 / 1;
+  transition: opacity 400ms ease-out;
 }
 
+/* Crossfade; the global reduced-motion rule makes it an instant swap. */
 .band-phrases > [aria-hidden="true"] {
   visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 400ms ease-out,
+    visibility 0s linear 400ms;
 }
 
+/* The longest word ("engineering") must fit the column at 320px. */
 .band-phrase {
   margin: 0;
-  font-size: var(--casey-size-band);
+  font-size: min(var(--casey-size-band), 15cqi);
+  overflow-wrap: break-word;
   line-height: 0.9;
   letter-spacing: var(--casey-tracking-display);
 }
 
+/*
+ * Ink on Artemisia Green is 4.27:1, under the 4.5:1 small-text minimum, so
+ * every control in the band is large text (24px), which needs only 3:1.
+ */
 .band-controls {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--swc-spacing-200) var(--swc-spacing-400);
+  font-size: max(24px, 1.5rem); /* the root is 14px, so 1.5rem alone is 21px */
+}
+
+.band-controls .meta {
+  font-size: inherit;
 }
 
 .band swc-action-button {
+  --swc-action-button-font-size: max(24px, 1.5rem);
   --swc-action-button-content-color-default: var(--casey-field-band-ink);
   --swc-action-button-content-color-hover: var(--casey-field-band-ink);
 }

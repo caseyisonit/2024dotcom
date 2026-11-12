@@ -2,7 +2,11 @@ import Image from "next/image";
 
 import fun from "@/assets/about/about-fun.jpg";
 import pro from "@/assets/about/about-pro.jpg";
-import { generateComposition, type CellMask, type Shape } from "@/lib/post-image";
+import {
+  generateComposition,
+  type CellMask,
+  type Shape,
+} from "@/lib/post-image";
 
 import { CELL, shapeElement } from "./PostImage";
 
@@ -33,18 +37,33 @@ function sharedEdges(cols: number, rows: number, mask: CellMask) {
       if (!mask(col, row)) continue;
       const x = (col + 1) * CELL;
       const y = (row + 1) * CELL;
-      if (col + 1 < cols && mask(col + 1, row)) lines.push(<line key={`v${col}-${row}`} x1={x} y1={row * CELL} x2={x} y2={y} />);
-      if (row + 1 < rows && mask(col, row + 1)) lines.push(<line key={`h${col}-${row}`} x1={col * CELL} y1={y} x2={x} y2={y} />);
+      if (col + 1 < cols && mask(col + 1, row))
+        lines.push(
+          <line key={`v${col}-${row}`} x1={x} y1={row * CELL} x2={x} y2={y} />,
+        );
+      if (row + 1 < rows && mask(col, row + 1))
+        lines.push(
+          <line key={`h${col}-${row}`} x1={col * CELL} y1={y} x2={x} y2={y} />,
+        );
     }
   }
   return <g className="post-image-grid">{lines}</g>;
 }
 
 function sideBand(side: "start" | "end") {
-  const inner = generateComposition(SEED, SIDE.cols, SIDE.rows, (col) => col === 0 || col === SIDE.cols - 1)
+  const inner = generateComposition(
+    SEED,
+    SIDE.cols,
+    SIDE.rows,
+    (col) => col === 0 || col === SIDE.cols - 1,
+  )
     .filter((s) => (side === "start" ? s.col === 0 : s.col === SIDE.cols - 1))
     .map((s) => ({ ...s, col: side === "start" ? SIDE.cols - 1 : 0 }));
-  const outer = generateComposition(`${SEED}:${side}`, SIDE.cols - 1, SIDE.rows).map((s) => ({
+  const outer = generateComposition(
+    `${SEED}:${side}`,
+    SIDE.cols - 1,
+    SIDE.rows,
+  ).map((s) => ({
     ...s,
     col: side === "start" ? s.col : s.col + 1,
   }));
@@ -56,7 +75,9 @@ function sideBand(side: "start" | "end") {
         width={SIDE.cols * SIDE.cell}
         height={SIDE.rows * SIDE.cell}
         viewBox={`0 0 ${SIDE.cols * CELL} ${SIDE.rows * CELL}`}
-        preserveAspectRatio={side === "start" ? "xMaxYMin slice" : "xMinYMin slice"}
+        preserveAspectRatio={
+          side === "start" ? "xMaxYMin slice" : "xMinYMin slice"
+        }
         aria-hidden="true"
         focusable="false"
       >
@@ -70,7 +91,11 @@ function sideBand(side: "start" | "end") {
 /** About portrait: the photo framed by generated shapes. Hover swaps in the fun photo. */
 export function AboutPortrait() {
   const designed = generateComposition(SEED, L.designed, L.rows, inL);
-  const extra = generateComposition(`${SEED}:wide`, L.cols - L.designed, L.rows).map((s) => ({ ...s, col: s.col + L.designed }));
+  const extra = generateComposition(
+    `${SEED}:wide`,
+    L.cols - L.designed,
+    L.rows,
+  ).map((s) => ({ ...s, col: s.col + L.designed }));
   const shapes = [...designed, ...extra];
   return (
     <div className="portrait">
@@ -96,7 +121,13 @@ export function AboutPortrait() {
           placeholder="blur"
           priority
         />
-        <Image src={fun} alt="" aria-hidden="true" className="portrait-fun" sizes="(min-width: 768px) 320px, 278px" />
+        <Image
+          src={fun}
+          alt=""
+          aria-hidden="true"
+          className="portrait-fun"
+          sizes="(min-width: 768px) 320px, 278px"
+        />
       </div>
       {sideBand("end")}
     </div>

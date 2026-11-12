@@ -22,7 +22,10 @@ export function FooterStatement() {
 
   useEffect(() => {
     if (paused) return;
-    const id = setInterval(() => setIndex((i) => (i + 1) % endings.length), INTERVAL_MS);
+    const id = setInterval(
+      () => setIndex((i) => (i + 1) % endings.length),
+      INTERVAL_MS,
+    );
     return () => clearInterval(id);
   }, [paused, endings.length]);
 
@@ -30,7 +33,10 @@ export function FooterStatement() {
     <div className="statement-block">
       <p className="headline headline--display headline--end statement">
         {lead}{" "}
-        <span className="statement-endings" aria-live={paused ? "polite" : "off"}>
+        <span
+          className="statement-endings"
+          aria-live={paused ? "polite" : "off"}
+        >
           {endings.map((ending, i) => (
             <strong key={ending} aria-hidden={i === index ? undefined : true}>
               {ending}
@@ -38,7 +44,12 @@ export function FooterStatement() {
           ))}
         </span>
       </p>
-      <swc-action-button quiet size="s" onClick={() => setPaused((p) => !p)} accessible-label={paused ? "Play statements" : "Pause statements"}>
+      <swc-action-button
+        quiet
+        size="s"
+        onClick={() => setPaused((p) => !p)}
+        accessible-label={paused ? "Play statements" : "Pause statements"}
+      >
         {paused ? "Play" : "Pause"}
       </swc-action-button>
     </div>

@@ -1,13 +1,18 @@
 import { FooterStatement } from "@/components/FooterStatement";
 import { site } from "@/content/site";
+import { hasWriting } from "@/lib/content";
 
 /** `lead` replaces the rotating statement (posts put Next post there); the links always stay. */
-export function SiteFooter({ lead }: { lead?: React.ReactNode }) {
+export async function SiteFooter({ lead }: { lead?: React.ReactNode }) {
+  const writing = await hasWriting();
+  const links = site.social.filter(
+    (item) => writing || item.href !== "/rss.xml",
+  );
   return (
     <footer className="site-footer field">
       {lead ?? <FooterStatement />}
       <ul className="links">
-        {site.social.map((item) => {
+        {links.map((item) => {
           const external = item.href.startsWith("http");
           return (
             <li key={item.href}>
@@ -17,7 +22,9 @@ export function SiteFooter({ lead }: { lead?: React.ReactNode }) {
                 {...(external ? { rel: "me noopener", target: "_blank" } : {})}
               >
                 {item.label}
-                {external && <span className="visually-hidden"> (opens in a new tab)</span>}
+                {external && (
+                  <span className="visually-hidden"> (opens in a new tab)</span>
+                )}
               </a>
             </li>
           );

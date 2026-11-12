@@ -25,7 +25,8 @@ export function parseEmphasis(text: string) {
   const runs: { text: string; stress: boolean }[] = [];
   let last = 0;
   for (const m of text.matchAll(/\*\*([\s\S]+?)\*\*/g)) {
-    if (m.index > last) runs.push({ text: text.slice(last, m.index), stress: false });
+    if (m.index > last)
+      runs.push({ text: text.slice(last, m.index), stress: false });
     runs.push({ text: m[1], stress: true });
     last = m.index + m[0].length;
   }
@@ -34,22 +35,44 @@ export function parseEmphasis(text: string) {
 }
 
 function withBreaks(s: string, key: string): ReactNode[] {
-  return s.split("\n").flatMap((part, i) => (i === 0 ? [part] : [<br key={`${key}-${i}`} />, part]));
+  return s
+    .split("\n")
+    .flatMap((part, i) =>
+      i === 0 ? [part] : [<br key={`${key}-${i}`} />, part],
+    );
 }
 
-export function Headline({ text, as: Tag = "h1", role = "display", position = "top", className, id }: Props) {
+export function Headline({
+  text,
+  as: Tag = "h1",
+  role = "display",
+  position = "top",
+  className,
+  id,
+}: Props) {
   const runs = parseEmphasis(keepTogether(text));
   const stressed = runs.some((r) => r.stress);
-  const classes = ["headline", `headline--${role}`, role === "display" && `headline--${position}`, className]
+  const classes = [
+    "headline",
+    `headline--${role}`,
+    role === "display" && `headline--${position}`,
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 
   // No authored stress means the whole headline is the payoff.
-  const content = stressed
-    ? runs.map((r, i) =>
-        r.stress ? <strong key={i}>{withBreaks(r.text, `s${i}`)}</strong> : withBreaks(r.text, `t${i}`),
-      )
-    : <strong>{withBreaks(runs.map((r) => r.text).join(""), "all")}</strong>;
+  const content = stressed ? (
+    runs.map((r, i) =>
+      r.stress ? (
+        <strong key={i}>{withBreaks(r.text, `s${i}`)}</strong>
+      ) : (
+        withBreaks(r.text, `t${i}`)
+      ),
+    )
+  ) : (
+    <strong>{withBreaks(runs.map((r) => r.text).join(""), "all")}</strong>
+  );
 
   return (
     <Tag className={classes} id={id}>

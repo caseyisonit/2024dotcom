@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
-const THEME_CLASSES = ["swc-theme--adaptive", "swc-theme--light", "swc-theme--dark"];
+const THEME_CLASSES = [
+  "swc-theme--adaptive",
+  "swc-theme--light",
+  "swc-theme--dark",
+];
 
 function resolvedTheme(): Theme {
   const root = document.documentElement;
@@ -43,7 +47,9 @@ export function ThemeToggle() {
       >
         <swc-icon-contrast slot="icon"></swc-icon-contrast>
       </swc-action-button>
-      <swc-tooltip for="theme-toggle">{dark ? "Switch to light mode" : "Switch to dark mode"}</swc-tooltip>
+      <swc-tooltip for="theme-toggle">
+        {dark ? "Switch to light mode" : "Switch to dark mode"}
+      </swc-tooltip>
     </>
   );
 }

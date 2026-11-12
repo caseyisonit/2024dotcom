@@ -5,7 +5,12 @@ import { AboutPortrait } from "@/components/AboutPortrait";
 import { Headline } from "@/components/Headline";
 import { site } from "@/content/site";
 
-export const metadata: Metadata = { title: "About" };
+export const metadata: Metadata = {
+  title: "About",
+  description: "Designer turned design engineer. Casey Eickhoff helps lead Spectrum Web Components at Adobe.",
+  alternates: { canonical: "/about" },
+  openGraph: { url: "/about" },
+};
 
 export default function AboutPage() {
   const [before, after] = site.about.outro.split("{work}");
@@ -13,7 +18,7 @@ export default function AboutPage() {
     <>
       <section className="section hero about-hero grid" aria-labelledby="about-title">
         <div className="cell hero-text">
-          <Headline id="about-title" text={site.about.hero} className="post-title" />
+          <Headline id="about-title" text={site.about.hero} className="about-title" />
         </div>
         <AboutPortrait />
       </section>

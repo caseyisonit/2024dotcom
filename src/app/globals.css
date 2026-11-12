@@ -313,10 +313,16 @@ main > .section:first-child {
 
 .statement-endings > * {
   grid-area: 1 / 1;
+  transition: opacity 400ms ease-out;
 }
 
+/* Crossfade; the global reduced-motion rule makes it an instant swap. */
 .statement-endings > [aria-hidden="true"] {
   visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 400ms ease-out,
+    visibility 0s linear 400ms;
 }
 
 .site-footer swc-action-button {
@@ -343,5 +349,41 @@ main > .section:first-child {
   .col-line,
   .site-header {
     border-color: CanvasText;
+  }
+
+  /* Generated shapes are decorative: keep their grid, draw shapes as outlines. */
+  .post-image-grid line {
+    stroke: CanvasText;
+  }
+
+  .post-image g[fill],
+  .portrait-band g[fill] {
+    fill: Canvas;
+    stroke: CanvasText;
+    stroke-width: 1px;
+    vector-effect: non-scaling-stroke;
+  }
+}
+
+@media print {
+  .site-header .site-actions,
+  .band-controls,
+  .statement-block swc-action-button,
+  .toc-cell,
+  .portrait-band,
+  .post-image,
+  .skip-link {
+    display: none !important;
+  }
+
+  .field,
+  .site-footer {
+    background: none;
+    color: inherit;
+  }
+
+  .prose a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.875em;
   }
 }

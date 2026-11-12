@@ -12,6 +12,10 @@ export const site = {
   name: "caseyisonit",
   logo: { word: "caseyison", tld: ".it" },
   url: "https://caseyison.it",
+  author: "Casey Eickhoff",
+  /** Default search and share description. */
+  description:
+    "Casey Eickhoff builds design systems and maintains Spectrum Web Components. Writing on design systems, AI, design engineering, and accessibility.",
 
   nav: [
     { label: "Writing", href: "/writing" },
@@ -50,7 +54,7 @@ export const site = {
   },
 
   about: {
-    hero: "Hi, I’m **Casey.**",
+    hero: "Hi, I’m\n**Casey.**",
     eyebrow: "Hi, I’m Casey Eickhoff",
     /** Rewritten from LinkedIn and the resume (Nov 2026); facts and numbers unchanged. */
     intro: [
