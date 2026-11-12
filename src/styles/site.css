@@ -22,7 +22,7 @@
 
 .dek {
   margin: 0;
-  max-inline-size: 40ch;
+  max-inline-size: 80ch;
   font-size: clamp(1.25rem, 1.11rem + 0.57vw, 1.625rem);
   font-weight: 500;
   line-height: 1.4;

@@ -46,7 +46,7 @@ export const site = {
   work: {
     /** `{years}` is computed from the earliest role in Notion. */
     hero: "Working\n{years} yrs **on it.**",
-    dek: "Making products that are functional, accessible, and delightful.",
+    dek: "Making systems and products that are functional, accessible, and delightful.",
   },
 
   about: {
