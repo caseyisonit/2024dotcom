@@ -11,18 +11,18 @@ export function SiteHeader() {
         <span className="logo-word">{site.logo.word}</span>
         <span className="logo-tld">{site.logo.tld}</span>
       </Link>
-      <nav aria-label="Primary" className="site-nav">
-        <ul className="links">
-          {site.nav.map((item) => (
-            <li key={item.href}>
-              <Link href={item.href} className="swc-Link swc-Link--quiet">
-                {item.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
       <div className="site-actions">
+        <nav aria-label="Primary" className="site-nav">
+          <ul className="links">
+            {site.nav.map((item) => (
+              <li key={item.href}>
+                <Link href={item.href} className="swc-Link swc-Link--quiet">
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <ThemeToggle />
         <MobileMenu />
       </div>

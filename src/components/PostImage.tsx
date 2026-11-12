@@ -1,8 +1,9 @@
-import { densestRow, generateComposition, type Shape } from "@/lib/post-image";
+import { STRIP, generateComposition, type Shape } from "@/lib/post-image";
 
-const CELL = 100;
+export const CELL = 100;
 
-function shapePath(s: Shape) {
+/** One shape in its cell. `fill` is a CSS color: a token on the site, hex in OG images. */
+export function shapeElement(s: Shape, fill: string) {
   const x = s.col * CELL;
   const y = s.row * CELL;
   const c = CELL / 2;
@@ -23,11 +24,13 @@ function shapePath(s: Shape) {
     }
   })();
   return (
-    <g key={`${s.col}-${s.row}`} transform={`rotate(${s.turn * 90} ${x + c} ${y + c})`} fill={`var(--casey-gen-${s.color})`}>
+    <g key={`${s.col}-${s.row}`} transform={`rotate(${s.turn * 90} ${x + c} ${y + c})`} fill={fill}>
       {body}
     </g>
   );
 }
+
+const shapePath = (s: Shape) => shapeElement(s, `var(--casey-gen-${s.color})`);
 
 function gridLines(cols: number, rows: number, top: number) {
   const lines = [];
@@ -40,10 +43,10 @@ function gridLines(cols: number, rows: number, top: number) {
 
 type Props = { seed: string; cols?: number; rows?: number; className?: string };
 
-/** Full composition plus the mobile strip (densest row). Decorative. */
+/** Full composition plus the 5×1 strip for smaller screens. Decorative. */
 export function PostImage({ seed, cols = 3, rows = 5, className }: Props) {
   const shapes = generateComposition(seed, cols, rows);
-  const strip = densestRow(shapes, rows);
+  const strip = generateComposition(seed, STRIP.cols, STRIP.rows);
 
   const classes = (variant: string) => ["post-image", `post-image--${variant}`, className].filter(Boolean).join(" ");
 
@@ -57,20 +60,9 @@ export function PostImage({ seed, cols = 3, rows = 5, className }: Props) {
         </svg>
       </swc-asset>
       <swc-asset decorative className={classes("strip")}>
-        <svg viewBox={`0 ${strip * CELL} ${cols * CELL} ${CELL}`} aria-hidden="true" focusable="false">
-          <defs>
-            <clipPath id={`strip-${seed}`}>
-              <rect x={0} y={strip * CELL} width={cols * CELL} height={CELL} />
-            </clipPath>
-          </defs>
-          <g clipPath={`url(#strip-${seed})`}>
-            {shapes.filter((s) => s.row === strip).map(shapePath)}
-            <g className="post-image-grid">
-              {Array.from({ length: cols - 1 }, (_, i) => (
-                <line key={i} x1={(i + 1) * CELL} y1={strip * CELL} x2={(i + 1) * CELL} y2={(strip + 1) * CELL} />
-              ))}
-            </g>
-          </g>
+        <svg viewBox={`0 0 ${STRIP.cols * CELL} ${STRIP.rows * CELL}`} aria-hidden="true" focusable="false">
+          {strip.map(shapePath)}
+          {gridLines(STRIP.cols, STRIP.rows, 0)}
         </svg>
       </swc-asset>
     </>

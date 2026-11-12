@@ -97,7 +97,7 @@ Every hue is Wada. Neutrals mixed by hand are labeled **mixed, not Wada**. No pu
 
 One shape, one job: circle = quantity (reading time, area ∝ minutes), square = unit, triangle = direction, semicircle = horizon, quarter circle = connection, bar = duration (`swc-meter`). Shapes fill their cell or sit on a grid line. Never decoration.
 
-Post image generator: SVG from the slug. Shapes colored in reading order, stepping through every accent from a seeded start; no two neighbors match. Dark mode swaps Blackish Olive and ink for Blush. Mobile uses a crop of the densest row.
+Post image generator: SVG from the slug. Shapes colored in reading order, stepping through every accent from a seeded start; no two neighbors match. Dark mode swaps Blackish Olive and ink for Blush. Below 1200px the hero uses its own 5×1 strip from the same seed: same palette rules, all five cells filled.
 
 ## Motion
 

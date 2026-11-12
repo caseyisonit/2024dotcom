@@ -72,12 +72,6 @@ export function topicSlug(topic: string) {
   return topic.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
-const dateFormat = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
-
-export function formatDate(iso: string) {
-  return dateFormat.format(new Date(`${iso}T00:00:00Z`));
-}
-
 export function topicFromSlug(slug: string) {
   return TOPICS.find((t) => topicSlug(t) === slug);
 }

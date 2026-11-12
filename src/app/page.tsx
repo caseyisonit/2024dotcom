@@ -5,7 +5,7 @@ import { FocusMeters } from "@/components/FocusMeters";
 import { Headline } from "@/components/Headline";
 import { PostList } from "@/components/PostList";
 import { site } from "@/content/site";
-import { TOPICS, formatDate, getPosts, getYearsByFocus, topicSlug } from "@/lib/content";
+import { TOPICS, getPosts, getYearsByFocus, topicSlug } from "@/lib/content";
 
 export default async function Home() {
   const [posts, focus] = await Promise.all([getPosts(), getYearsByFocus()]);
@@ -37,7 +37,7 @@ export default async function Home() {
                 {latest.plainTitle}
               </Link>
               <p className="meta">
-                {latest.readingTime} min · <time dateTime={latest.published}>{formatDate(latest.published)}</time>
+                {latest.readingTime} min
               </p>
             </div>
           )}

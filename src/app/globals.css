@@ -231,9 +231,11 @@ main > .section:first-child {
   display: none;
 }
 
+/* Nav, theme toggle, and mobile menu share one gap so their spacing matches. */
 .site-actions {
   display: flex;
-  grid-column: -2 / -1;
+  grid-column: 4 / -1;
+  align-items: center;
   justify-content: flex-end;
   gap: var(--swc-spacing-100);
 }
@@ -264,10 +266,10 @@ main > .section:first-child {
     min-block-size: 88px;
   }
 
+  /* Match the visible icon-to-icon gap: add the toggle's icon inset after the last link. */
   .site-nav {
     display: block;
-    grid-column: 7 / -2;
-    padding-inline: var(--casey-content-inset);
+    margin-inline-end: var(--casey-action-icon-inset);
   }
 
   .site-actions {
@@ -276,13 +278,6 @@ main > .section:first-child {
 
   .mobile-menu {
     display: none;
-  }
-}
-
-/* Nav sits over the hero's side column once there is room (Figma: x 944). */
-@media (min-width: 1200px) {
-  .site-nav {
-    grid-column: 9 / -2;
   }
 }
 

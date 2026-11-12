@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { formatDate, topicSlug, type PostMeta } from "@/lib/content";
+import { topicSlug, type PostMeta } from "@/lib/content";
 
 import { Headline } from "./Headline";
 
@@ -31,7 +31,7 @@ export function PostList({ posts, numbered = true }: { posts: PostMeta[]; number
               <swc-badge size="s">{post.topic}</swc-badge>
             </Link>
             <span className="meta">
-              {post.readingTime} min · <time dateTime={post.published}>{formatDate(post.published)}</time>
+              {post.readingTime} min
             </span>
           </div>
           <div className="cell post-circle">

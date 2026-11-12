@@ -102,6 +102,8 @@
   --casey-content-inset: var(--swc-spacing-300); /* 16; content edge at 31 on mobile */
   --casey-columns: 4;
   --casey-rule-width: 1px;
+  /* Icon inset inside a size-m quiet swc-action-button (32px box, 18px icon). No public hook. */
+  --casey-action-icon-inset: 7px;
 }
 
 @media (min-width: 768px) {

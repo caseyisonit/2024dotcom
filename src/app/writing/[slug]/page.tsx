@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { AnchorMenu } from "@/components/AnchorMenu";
 import { Headline } from "@/components/Headline";
 import { PostImage } from "@/components/PostImage";
-import { formatDate, getNextPost, getPost, getPosts, topicSlug } from "@/lib/content";
+import { getNextPost, getPost, getPosts, topicSlug } from "@/lib/content";
 import { renderBody } from "@/lib/content/render";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -36,7 +36,7 @@ export default async function PostPage({ params }: Params) {
                 <swc-badge size="s">{post.topic}</swc-badge>
               </Link>
               <span className="meta">
-                {post.readingTime} min read · <time dateTime={post.published}>{formatDate(post.published)}</time>
+                {post.readingTime} min read
               </span>
             </p>
             {post.status === "draft" && (

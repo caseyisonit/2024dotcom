@@ -633,7 +633,7 @@ swc-meter.tenure {
 
 /*
  * The full composition sits beside the title once the column is tall enough
- * to hold it (≥ 1200px). Below that, the densest row runs as a strip on top.
+ * to hold it (≥ 1200px). Below that, a 5×1 strip from the same seed runs on top.
  * The image's bottom edge draws a rule (overlapping the next section's rule
  * by 1px when they meet) so it never floats.
  */

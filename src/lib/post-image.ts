@@ -60,9 +60,11 @@ export function generateComposition(seed: string, cols = 3, rows = 5): Shape[] {
   const cells: { col: number; row: number }[] = [];
   for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) cells.push({ col, row });
 
-  // Keep at least one full pass of the palette so every accent shows.
+  // Keep at least one full pass of the palette so every accent shows; grids
+  // with fewer cells than accents (the strip) fill every cell.
+  const minimum = Math.min(PALETTE_SIZE, cells.length);
   const filled = cells.filter(() => rand() >= EMPTY_CHANCE);
-  for (const cell of cells) if (filled.length < PALETTE_SIZE && !filled.includes(cell)) filled.push(cell);
+  for (const cell of cells) if (filled.length < minimum && !filled.includes(cell)) filled.push(cell);
   filled.sort((a, b) => a.row - b.row || a.col - b.col);
 
   return filled.map((cell, i) => ({
@@ -73,8 +75,5 @@ export function generateComposition(seed: string, cols = 3, rows = 5): Shape[] {
   }));
 }
 
-/** The row with the most shapes; the mobile strip shows only this row. */
-export function densestRow(shapes: Shape[], rows = 5) {
-  const counts = Array.from({ length: rows }, (_, r) => shapes.filter((s) => s.row === r).length);
-  return counts.indexOf(Math.max(...counts));
-}
+/** Below 1200px the hero shows its own 5×1 strip from the same seed. */
+export const STRIP = { cols: 5, rows: 1 } as const;
