@@ -1,0 +1,7 @@
+/*
+ * Brand token overrides go here.
+ *
+ * Loaded after @adobe/spectrum-wc/swc.css. SWC's token stylesheet is not in a
+ * cascade layer, so overrides must stay unlayered and match its selectors
+ * (`:root, .swc-theme`) to win by source order.
+ */

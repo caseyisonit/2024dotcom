@@ -1,35 +1,16 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import LandingGraphic from "@/components/landingGraphic/landingGraphic";
-
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <section className={styles.intro}>
-        <h1>Casey Eickhoff</h1>
-        <h2>Senior Software Engineer</h2>
-        <h3>Located in the Rocky Mountains</h3>
-      </section>
-      {/* <LandingGraphic /> */}
-      <section className={styles.summary}>
-        <h2>Howdy!</h2>
-        <p>
-          I’m a Senior Software Engineer with over a decade of
-          experience in UX design, specializing in design systems and
-          accessibility.
-        </p>
-        <p>
-          I love blending engineering and design to create
-          products that are not only functional but also user-friendly and
-          delightful to use.
-        </p>
-        <p>
-          I have a knack for leading and mentoring teams to
-          achieve fantastic results and make a real impact. Let’s create
-          something amazing together!
-        </p>
-      </section>
-      <a className={styles.link} href="https://www.linkedin.com/in/caseyeickhoff/" target="blank">View my LinkedIn</a>
+    <main>
+      <h1>SWC gen2 smoke test</h1>
+      <p>
+        Theme follows the system light/dark preference via
+        <code> swc-theme--adaptive</code> on the root element.
+      </p>
+      <swc-divider size="s"></swc-divider>
+      <p>
+        <swc-button variant="accent">Accent button</swc-button>{" "}
+        <swc-badge variant="positive">Badge</swc-badge>
+      </p>
     </main>
   );
 }

@@ -1,12 +1,12 @@
-// use client
-
 import type { Metadata } from "next";
-import { montserrat } from "./nextFonts";
 import { Analytics } from "@vercel/analytics/react";
 
-import "./normalize.css";
-import "./webfonts.css";
+import "@adobe/spectrum-wc/swc.css";
+import "@adobe/spectrum-wc/typography.css";
+import "@/styles/brand/brand.css";
 import "./globals.css";
+
+import { SwcRegistry } from "@/swc/registry";
 
 export const metadata: Metadata = {
   title: "Casey Eickhoff - Senior Software Engineer",
@@ -20,8 +20,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={montserrat.variable}>
+    <html lang="en" className="swc-theme--adaptive">
       <body>
+        <SwcRegistry />
         {children}
         <Analytics />
       </body>
