@@ -53,12 +53,15 @@ function pickKind(r: number): ShapeKind {
   return "circle";
 }
 
-export function generateComposition(seed: string, cols = 3, rows = 5): Shape[] {
+/** Which cells may hold a shape; the rest stay empty (for example, where a photo sits). */
+export type CellMask = (col: number, row: number) => boolean;
+
+export function generateComposition(seed: string, cols = 3, rows = 5, mask?: CellMask): Shape[] {
   const h = hash(seed);
   const rand = random(h);
   const start = h % PALETTE_SIZE;
   const cells: { col: number; row: number }[] = [];
-  for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) cells.push({ col, row });
+  for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) if (!mask || mask(col, row)) cells.push({ col, row });
 
   // Keep at least one full pass of the palette so every accent shows; grids
   // with fewer cells than accents (the strip) fill every cell.

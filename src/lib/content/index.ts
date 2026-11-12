@@ -55,13 +55,36 @@ export async function getYearsWorking(now = new Date()) {
   return Math.floor((now.getTime() - new Date(first.start).getTime()) / YEAR_MS);
 }
 
-/** Sum of tenure per focus area, rounded to whole years. */
+/** Total time covered by a set of roles, merging overlaps (the studio ran alongside full-time jobs). */
+function coveredYears(roles: Role[], now: Date) {
+  const spans = roles
+    .map((r) => [new Date(r.start).getTime(), r.end ? new Date(r.end).getTime() : now.getTime()])
+    .sort((a, b) => a[0] - b[0]);
+  let total = 0;
+  let [from, to] = spans[0] ?? [0, 0];
+  for (const [start, end] of spans.slice(1)) {
+    if (start > to) {
+      total += to - from;
+      [from, to] = [start, end];
+    } else to = Math.max(to, end);
+  }
+  return (total + to - from) / YEAR_MS;
+}
+
+/** Years per focus area, rounded; overlapping roles count once. Roles with no focus area (early career) add nothing. */
 export async function getYearsByFocus(now = new Date()): Promise<{ area: FocusArea; years: number }[]> {
   const roles = await getRoles();
   return FOCUS_AREAS.map((area) => ({
     area,
-    years: Math.round(roles.filter((r) => r.focusAreas.includes(area)).reduce((sum, r) => sum + tenureYears(r, now), 0)),
+    years: Math.round(coveredYears(roles.filter((r) => r.focusAreas.includes(area)), now)),
   }));
+}
+
+/** "3 mos" under a year, otherwise whole years. */
+export function formatTenure(years: number) {
+  if (years < 1) return `${Math.max(1, Math.round(years * 12))} mos`;
+  const n = Math.round(years);
+  return `${n} ${n === 1 ? "yr" : "yrs"}`;
 }
 
 export async function getCurrentRole() {

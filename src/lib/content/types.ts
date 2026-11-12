@@ -7,7 +7,7 @@
 export const TOPICS = ["Design systems", "AI", "Design engineering", "Accessibility"] as const;
 export type Topic = (typeof TOPICS)[number];
 
-export const FOCUS_AREAS = ["Design systems", "Accessibility", "UX & UI design", "Design engineering"] as const;
+export const FOCUS_AREAS = ["Design systems", "Design engineering", "Accessibility", "UX & UI design", "Brand & art direction"] as const;
 export type FocusArea = (typeof FOCUS_AREAS)[number];
 
 export type PostStatus = "draft" | "published";

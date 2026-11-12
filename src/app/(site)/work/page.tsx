@@ -3,16 +3,27 @@ import type { Metadata } from "next";
 import { FocusMeters } from "@/components/FocusMeters";
 import { Headline } from "@/components/Headline";
 import { site } from "@/content/site";
-import { getCurrentRole, getRoles, getYearsByFocus, getYearsWorking, tenureYears } from "@/lib/content";
+import { formatTenure, getCurrentRole, getRoles, getYearsByFocus, getYearsWorking, tenureYears, type Role } from "@/lib/content";
 
 export const metadata: Metadata = { title: "Work" };
 
-const yearOf = (iso?: string) => (iso ? iso.slice(0, 4) : "Now");
+const yearOf = (iso: string) => iso.slice(0, 4);
+
+function RoleDates({ role }: { role: Role }) {
+  const start = <time dateTime={role.start}>{yearOf(role.start)}</time>;
+  if (!role.end) return <>{start} – Now</>;
+  if (yearOf(role.end) === yearOf(role.start)) return start;
+  return (
+    <>
+      {start} – <time dateTime={role.end}>{yearOf(role.end)}</time>
+    </>
+  );
+}
 
 export default async function WorkPage() {
   const [roles, focus, years, current] = await Promise.all([getRoles(), getYearsByFocus(), getYearsWorking(), getCurrentRole()]);
   const linkedIn = site.social.find((s) => s.label === "LinkedIn");
-  const maxTenure = Math.max(...roles.map((r) => tenureYears(r)), 1);
+  const maxMonths = Math.max(...roles.map((r) => Math.round(tenureYears(r) * 12)), 1);
 
   return (
     <>
@@ -76,13 +87,13 @@ export default async function WorkPage() {
               <li key={`${r.company}-${r.start}`} className="role-row grid">
                 <div className="cell role-dates">
                   <p className="meta">
-                    <time dateTime={r.start}>{yearOf(r.start)}</time> – {r.end ? <time dateTime={r.end}>{yearOf(r.end)}</time> : "Now"}
+                    <RoleDates role={r} />
                   </p>
                   <swc-meter
                     className="tenure"
-                    value={Math.round(tenure)}
-                    max-value={Math.round(maxTenure)}
-                    value-label={`${Math.round(tenure)} yrs`}
+                    value={Math.max(1, Math.round(tenure * 12))}
+                    max-value={maxMonths}
+                    value-label={formatTenure(tenure)}
                     accessible-label="Tenure"
                   ></swc-meter>
                 </div>
@@ -97,14 +108,16 @@ export default async function WorkPage() {
                     <li key={h}>{h}</li>
                   ))}
                 </ul>
-                <div className="cell role-focus">
-                  <p className="eyebrow">Focus</p>
-                  <ul>
-                    {r.focusAreas.map((a) => (
-                      <li key={a}>{a}</li>
-                    ))}
-                  </ul>
-                </div>
+                {r.focusAreas.length > 0 && (
+                  <div className="cell role-focus">
+                    <p className="eyebrow">Focus</p>
+                    <ul>
+                      {r.focusAreas.map((a) => (
+                        <li key={a}>{a}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </li>
             );
           })}

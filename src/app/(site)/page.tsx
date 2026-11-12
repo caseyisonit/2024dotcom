@@ -48,7 +48,7 @@ export default async function Home() {
         </aside>
       </section>
 
-      <Band />
+      <Band hasWriting={posts.length > 0} />
 
       <section className="section intro grid" aria-labelledby="intro-title">
         <p className="cell eyebrow intro-eyebrow" id="intro-title">

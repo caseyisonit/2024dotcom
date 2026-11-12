@@ -8,7 +8,6 @@ import "@/styles/brand/brand.css";
 import "./globals.css";
 import "@/styles/site.css";
 
-import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { themeBootScript } from "@/components/ThemeToggle";
 import { SwcRegistry } from "@/swc/registry";
@@ -37,10 +36,8 @@ export default function RootLayout({
         </a>
         <SwcRegistry />
         <SiteHeader />
-        <main id="main" tabIndex={-1}>
-          {children}
-        </main>
-        <SiteFooter />
+        {/* Route groups own <main> and the footer: (site) rotates the footer statement, (post) puts Next post there. */}
+        {children}
         <Analytics />
       </body>
     </html>

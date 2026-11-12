@@ -1,10 +1,11 @@
-import { Headline } from "@/components/Headline";
+import { FooterStatement } from "@/components/FooterStatement";
 import { site } from "@/content/site";
 
-export function SiteFooter() {
+/** `lead` replaces the rotating statement (posts put Next post there); the links always stay. */
+export function SiteFooter({ lead }: { lead?: React.ReactNode }) {
   return (
     <footer className="site-footer field">
-      <Headline as="p" text={site.footer.statement} position="end" className="statement" />
+      {lead ?? <FooterStatement />}
       <ul className="links">
         {site.social.map((item) => {
           const external = item.href.startsWith("http");

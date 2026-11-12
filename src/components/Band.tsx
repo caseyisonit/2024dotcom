@@ -13,9 +13,10 @@ function topicHref(topic: string) {
 
 /**
  * The phrase band under the hero. Rotates only when the user allows motion,
- * and always offers a pause control (WCAG 2.2.2).
+ * and always offers a pause control (WCAG 2.2.2). Without published writing
+ * the phrases still rotate, but "Next topic" and the topic link are left out.
  */
-export function Band() {
+export function Band({ hasWriting }: { hasWriting: boolean }) {
   const phrases = site.band;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(true);
@@ -49,13 +50,17 @@ export function Band() {
         <swc-action-button quiet size="s" onClick={() => setPaused((p) => !p)} accessible-label={paused ? "Play topics" : "Pause topics"}>
           {paused ? "Play" : "Pause"}
         </swc-action-button>
-        <swc-action-button quiet size="s" onClick={() => setIndex((i) => (i + 1) % phrases.length)}>
-          Next topic
-        </swc-action-button>
-        <Link href={topicHref(current.topic)} className="swc-Link band-link">
-          Read the {current.phrase} writing
-          <swc-icon-chevron-right size="s"></swc-icon-chevron-right>
-        </Link>
+        {hasWriting && (
+          <>
+            <swc-action-button quiet size="s" onClick={() => setIndex((i) => (i + 1) % phrases.length)}>
+              Next topic
+            </swc-action-button>
+            <Link href={topicHref(current.topic)} className="swc-Link band-link">
+              Read the {current.phrase} writing
+              <swc-icon-chevron-right size="s"></swc-icon-chevron-right>
+            </Link>
+          </>
+        )}
       </div>
     </section>
   );

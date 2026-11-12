@@ -823,19 +823,11 @@ swc-meter.tenure {
 }
 
 /* ---------------------------------------------------------------------------
- * Next post (shares the footer field; a rule in footer ink separates them)
+ * Next post (takes the footer statement's place on posts)
  * ------------------------------------------------------------------------ */
-.next-post {
-  --casey-focus: var(--casey-field-foot-ink);
-
-  background: var(--casey-field-foot);
-  color: var(--casey-field-foot-ink);
-}
-
 .next-link {
   display: grid;
   gap: var(--casey-space-heading);
-  padding: var(--casey-space-section) calc(var(--casey-page-margin) + var(--casey-content-inset));
   color: inherit;
   text-decoration: none;
 }
@@ -853,13 +845,162 @@ swc-meter.tenure {
   text-underline-offset: 0.1em;
 }
 
-main:has(> .next-post:last-child) + .site-footer {
-  border-block-start: var(--casey-rule-width) solid var(--casey-field-foot-ink);
-}
-
 .next-row swc-icon-arrow-ui-right {
   --swc-icon-inline-size: calc(var(--casey-size-next) * 0.6);
   --swc-icon-block-size: calc(var(--casey-size-next) * 0.6);
 
   flex: none;
+}
+
+/* ---------------------------------------------------------------------------
+ * About
+ * ------------------------------------------------------------------------ */
+/*
+ * Below 768px (the menu-icon breakpoint) the portrait runs full-bleed under the headline: one column of
+ * 56px cells each side of a 278 × 448 photo (wider screens reveal more cells).
+ * From 768px it sits in the hero on a 64px grid: an L of shapes across the
+ * top and down the right, the 5:8 photo bottom-left. The right band snaps to
+ * whole 64px columns: one where space is tight, two once there is room (as
+ * designed at 1440), more on very wide screens.
+ */
+.about-hero .hero-text {
+  padding-block-end: var(--casey-space-section);
+}
+
+.portrait {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(0, 1fr) 278px minmax(0, 1fr);
+  block-size: calc(448px + var(--casey-rule-width)); /* 8 rows of 56, plus the top rule */
+  margin-inline: calc(-1 * var(--casey-page-margin));
+  border-block-start: var(--rule);
+  background: var(--casey-ground);
+}
+
+.portrait-band svg {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+/* Keep swc-asset's own flex display so its wrapper stretches to the cell height. */
+.portrait-band {
+  overflow: hidden;
+}
+
+.portrait-band--l {
+  display: none;
+}
+
+.portrait-photo {
+  position: relative;
+  border-inline: var(--rule);
+}
+
+.portrait-photo img {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  object-position: 50% 38.2%;
+}
+
+/* Hover easter egg: dissolve to the fun photo. Touch devices keep the default. */
+.portrait-fun {
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+}
+
+@media (hover: hover) {
+  .portrait-photo:hover .portrait-fun {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-fun {
+    transition: none;
+  }
+}
+
+.intro-side {
+  display: grid;
+  align-content: start;
+  gap: var(--casey-space-heading);
+  padding-block-end: 0;
+}
+
+.about-where {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .intro-side {
+    grid-column: 1 / 4;
+    padding-block-end: var(--casey-space-section);
+  }
+
+  .about-where {
+    display: grid;
+    gap: var(--swc-spacing-100);
+    padding-block-start: var(--casey-space-heading);
+    border-block-start: var(--rule);
+  }
+}
+
+@media (min-width: 768px) {
+  .about-hero {
+    --portrait-cols: 1;
+
+    grid-template-columns: minmax(0, 1fr) calc(320px + var(--portrait-cols) * 64px);
+    padding-inline-end: 0;
+  }
+
+  .about-hero .hero-text {
+    grid-column: 1;
+    border-inline-end: var(--rule);
+  }
+
+  .portrait {
+    grid-column: 2;
+    grid-template-columns: 320px minmax(0, 1fr);
+    grid-template-rows: 128px 512px;
+    block-size: auto;
+    margin-inline: 0;
+    border-block-start: 0;
+  }
+
+  .portrait-band--start,
+  .portrait-band--end {
+    display: none;
+  }
+
+  .portrait-band--l {
+    display: flex;
+    grid-area: 1 / 1 / -1 / -1;
+  }
+
+  .portrait-photo {
+    grid-area: 2 / 1;
+    border-inline: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .about-hero {
+    --portrait-cols: 2;
+  }
+}
+
+@media (min-width: 1680px) {
+  .about-hero {
+    --portrait-cols: 3;
+  }
+}
+
+@media (min-width: 2240px) {
+  .about-hero {
+    --portrait-cols: 4;
+  }
 }

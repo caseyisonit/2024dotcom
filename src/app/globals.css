@@ -295,8 +295,33 @@ main > .section:first-child {
 }
 
 .statement {
+  margin: 0;
   font-size: var(--casey-size-statement);
   text-wrap: pretty;
+}
+
+.statement-block {
+  display: grid;
+  justify-items: start;
+  gap: var(--swc-spacing-200);
+}
+
+/* Every ending shares one cell, so the footer keeps the height of the longest. */
+.statement-endings {
+  display: grid;
+}
+
+.statement-endings > * {
+  grid-area: 1 / 1;
+}
+
+.statement-endings > [aria-hidden="true"] {
+  visibility: hidden;
+}
+
+.site-footer swc-action-button {
+  --swc-action-button-content-color-default: var(--casey-field-foot-ink);
+  --swc-action-button-content-color-hover: var(--casey-field-foot-ink);
 }
 
 /* ---------------------------------------------------------------------------

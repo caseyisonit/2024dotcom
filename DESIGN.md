@@ -99,6 +99,8 @@ One shape, one job: circle = quantity (reading time, area ∝ minutes), square =
 
 Post image generator: SVG from the slug. Shapes colored in reading order, stepping through every accent from a seeded start; no two neighbors match. Dark mode swaps Blackish Olive and ink for Blush. Below 1200px the hero uses its own 5×1 strip from the same seed: same palette rules, all five cells filled.
 
+About portrait: the same generator (seed `about`) with a cell mask, so shapes only land in the band around the photo. From 768px: a 64px grid, an L across the top two rows and down the right of the 320 × 512 photo; the right band snaps to whole columns (1 below 900px, 2 from 900px as designed, more on very wide screens). Below 768px: 56px columns either side of a 278 × 448 photo. Hover dissolves to the fun photo in 200ms (instant with reduced motion; no swap on touch).
+
 ## Motion
 
 Opt-in via `prefers-reduced-motion: no-preference`. Plays once on scroll-in, never loops: turn (rotate 90°, 400ms, `cubic-bezier(0.2, 0.8, 0.2, 1)`), grow (scale from 0, 480ms ease-out, 80ms stagger), settle (tiles fade/scale, 200ms, 50ms stagger).
