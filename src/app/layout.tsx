@@ -3,9 +3,13 @@ import { Analytics } from "@vercel/analytics/react";
 
 import "@adobe/spectrum-wc/swc.css";
 import "@adobe/spectrum-wc/typography.css";
+import "@adobe/spectrum-wc/link.css";
 import "@/styles/brand/brand.css";
 import "./globals.css";
 
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
+import { themeBootScript } from "@/components/ThemeToggle";
 import { SwcRegistry } from "@/swc/registry";
 import { fontVariables } from "@/styles/fonts";
 
@@ -21,10 +25,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`swc-theme--adaptive ${fontVariables}`}>
+    // The boot script may swap the theme class before hydration.
+    <html lang="en" className={`swc-theme--adaptive ${fontVariables}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
+      </head>
       <body>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
         <SwcRegistry />
-        {children}
+        <SiteHeader />
+        <main id="main" tabIndex={-1}>
+          {children}
+        </main>
+        <SiteFooter />
         <Analytics />
       </body>
     </html>

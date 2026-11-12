@@ -5,7 +5,16 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
   margin: 0;
+  background: var(--casey-ground);
+  color: var(--casey-ink);
+  font-family: var(--casey-font-ui);
+  font-size: var(--casey-size-body);
+  line-height: var(--casey-leading-body);
+  -webkit-font-smoothing: antialiased;
 }
 
 /*
@@ -18,6 +27,7 @@ body {
       swc-accordion,
       swc-accordion-item,
       swc-action-button,
+      swc-asset,
       swc-avatar,
       swc-badge,
       swc-button,
@@ -25,6 +35,7 @@ body {
       swc-divider,
       swc-icon,
       swc-menu,
+      swc-meter,
       swc-popover,
       swc-status-light,
       swc-tabs,
@@ -41,4 +52,278 @@ body {
   to {
     visibility: visible;
   }
+}
+
+/* ---------------------------------------------------------------------------
+ * Utilities
+ * ------------------------------------------------------------------------ */
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: var(--swc-focus-indicator-thickness, 2px) solid var(--casey-focus);
+  outline-offset: var(--swc-focus-ring-gap, 2px);
+}
+
+main {
+  flex: 1;
+}
+
+main:focus {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  inset-block-start: var(--swc-spacing-200);
+  inset-inline-start: var(--swc-spacing-200);
+  z-index: 10;
+  padding: var(--swc-spacing-100) var(--swc-spacing-300);
+  background: var(--casey-ink);
+  color: var(--casey-ground);
+  font-weight: 700;
+  translate: 0 -200%;
+}
+
+.skip-link:focus-visible {
+  translate: 0;
+}
+
+/* ---------------------------------------------------------------------------
+ * Grid and sections (DESIGN.md › Space and grid, Grid lines)
+ *
+ * A section draws its own top rule, full bleed. Filled sections (`.field`)
+ * are their own border, so the rule after a field is dropped. The site header
+ * owns the rule under it, so the first section has none.
+ * ------------------------------------------------------------------------ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--casey-columns), minmax(0, 1fr));
+  padding-inline: var(--casey-page-margin);
+}
+
+.section {
+  border-block-start: var(--casey-rule-width) solid var(--casey-rule);
+}
+
+.field,
+.field + .section,
+main > .section:first-child {
+  border-block-start: 0;
+}
+
+.cell {
+  padding: var(--casey-space-section) var(--casey-content-inset);
+}
+
+.cell + .cell {
+  border-inline-start: var(--casey-rule-width) solid var(--casey-rule);
+}
+
+/* ---------------------------------------------------------------------------
+ * Headlines (DESIGN.md › Headline system)
+ * ------------------------------------------------------------------------ */
+.headline {
+  margin: 0;
+  font-family: var(--casey-font-display);
+  font-variation-settings: "opsz" 96;
+  text-wrap: balance;
+}
+
+.headline--display {
+  font-weight: var(--casey-weight-setup);
+  line-height: var(--casey-leading-display);
+  letter-spacing: var(--casey-tracking-display);
+}
+
+.headline--display strong {
+  font-weight: var(--casey-weight-stress);
+}
+
+.headline--top strong {
+  color: var(--casey-stress-top);
+}
+
+.headline--end strong {
+  color: var(--casey-stress-end);
+}
+
+.headline--heading {
+  font-weight: var(--casey-weight-stress);
+  line-height: var(--casey-leading-heading);
+  letter-spacing: var(--casey-tracking-heading);
+}
+
+.headline--heading strong {
+  font-weight: inherit;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: var(--casey-size-eyebrow);
+  font-weight: 700;
+  letter-spacing: var(--casey-tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------
+ * Links
+ * ------------------------------------------------------------------------ */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--swc-spacing-300) var(--swc-spacing-500);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links .swc-Link {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.links .swc-Link:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------------------
+ * Site header
+ * ------------------------------------------------------------------------ */
+.site-header {
+  display: grid;
+  grid-template-columns: repeat(var(--casey-columns), minmax(0, 1fr));
+  align-items: center;
+  min-block-size: 76px;
+  padding-inline: var(--casey-page-margin);
+  border-block-end: var(--casey-rule-width) solid var(--casey-rule);
+}
+
+.logo {
+  grid-column: 1 / span 3;
+  padding-inline: var(--casey-content-inset);
+  color: inherit;
+  font-family: var(--casey-font-display);
+  font-size: 1.375rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.logo-word {
+  font-weight: var(--casey-weight-stress);
+}
+
+.logo-tld {
+  font-weight: var(--casey-weight-setup);
+}
+
+.site-nav {
+  display: none;
+}
+
+.site-actions {
+  display: flex;
+  grid-column: -2 / -1;
+  justify-content: flex-end;
+  gap: var(--swc-spacing-100);
+}
+
+.menu-links {
+  display: grid;
+  gap: var(--swc-spacing-100);
+  min-inline-size: 12rem;
+  margin: 0;
+  padding: var(--swc-spacing-200);
+  list-style: none;
+}
+
+.menu-links a {
+  display: block;
+  padding: var(--swc-spacing-100) var(--swc-spacing-200);
+  color: var(--casey-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.menu-links a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .site-header {
+    min-block-size: 88px;
+  }
+
+  .site-nav {
+    display: block;
+    grid-column: 7 / -2;
+    padding-inline: var(--casey-content-inset);
+  }
+
+  .site-actions {
+    padding-inline-end: var(--casey-content-inset);
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+}
+
+/* Nav sits over the hero's side column once there is room (Figma: x 944). */
+@media (min-width: 1200px) {
+  .site-nav {
+    grid-column: 9 / -2;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Site footer
+ * ------------------------------------------------------------------------ */
+.site-footer {
+  --casey-focus: var(--casey-field-foot-ink);
+
+  display: grid;
+  gap: var(--casey-space-heading);
+  padding: var(--casey-space-section) calc(var(--casey-page-margin) + var(--casey-content-inset));
+  background: var(--casey-field-foot);
+  color: var(--casey-field-foot-ink);
+}
+
+.statement {
+  font-size: var(--casey-size-statement);
+  text-wrap: pretty;
+}
+
+/* ---------------------------------------------------------------------------
+ * Preferences
+ * ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .section,
+  .cell + .cell,
+  .site-header {
+    border-color: CanvasText;
+  }
+}
+
+.hero-title {
+  font-size: var(--casey-size-hero);
 }

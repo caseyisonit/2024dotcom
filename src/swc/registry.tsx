@@ -17,12 +17,18 @@ function registerElements() {
     import("@adobe/spectrum-wc/components/divider/swc-divider.js"),
     import("@adobe/spectrum-wc/components/icon/swc-icon.js"),
     import("@adobe/spectrum-wc/components/menu/swc-menu.js"),
+    import("@adobe/spectrum-wc/components/meter/swc-meter.js"),
+    import("@adobe/spectrum-wc/components/asset/swc-asset.js"),
     import("@adobe/spectrum-wc/components/popover/swc-popover.js"),
     import("@adobe/spectrum-wc/components/status-light/swc-status-light.js"),
     import("@adobe/spectrum-wc/components/tabs/swc-tabs.js"),
     import("@adobe/spectrum-wc/components/tabs/swc-tab.js"),
     import("@adobe/spectrum-wc/components/tabs/swc-tab-panel.js"),
     import("@adobe/spectrum-wc/components/tooltip/swc-tooltip.js"),
+    import("@adobe/spectrum-wc-icons/swc-icon-contrast.js"),
+    import("@adobe/spectrum-wc-icons/swc-icon-menu-hamburger.js"),
+    import("@adobe/spectrum-wc-icons/swc-icon-chevron-right.js"),
+    import("@adobe/spectrum-wc-icons/swc-icon-arrow-ui-right.js"),
   ]);
 }
 

@@ -1,16 +1,12 @@
+import { Headline } from "@/components/Headline";
+
+// Shell check only. The real Home page arrives in step 4.
 export default function Home() {
   return (
-    <main>
-      <h1>SWC gen2 smoke test</h1>
-      <p>
-        Theme follows the system light/dark preference via
-        <code> swc-theme--adaptive</code> on the root element.
-      </p>
-      <swc-divider size="s"></swc-divider>
-      <p>
-        <swc-button variant="accent">Accent button</swc-button>{" "}
-        <swc-badge variant="positive">Badge</swc-badge>
-      </p>
-    </main>
+    <section className="section grid" aria-labelledby="hero-title">
+      <div className="cell" style={{ gridColumn: "1 / -1" }}>
+        <Headline id="hero-title" text={"Casey\nis **on it:**"} className="hero-title" />
+      </div>
+    </section>
   );
 }
