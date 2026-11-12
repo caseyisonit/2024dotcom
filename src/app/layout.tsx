@@ -7,6 +7,7 @@ import "@/styles/brand/brand.css";
 import "./globals.css";
 
 import { SwcRegistry } from "@/swc/registry";
+import { fontVariables } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: "Casey Eickhoff - Senior Software Engineer",
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="swc-theme--adaptive">
+    <html lang="en" className={`swc-theme--adaptive ${fontVariables}`}>
       <body>
         <SwcRegistry />
         {children}

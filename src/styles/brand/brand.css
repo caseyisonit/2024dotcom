@@ -1,7 +1,159 @@
 /*
- * Brand token overrides go here.
+ * Brand tokens for caseyisonit. See DESIGN.md.
  *
- * Loaded after @adobe/spectrum-wc/swc.css. SWC's token stylesheet is not in a
- * cascade layer, so overrides must stay unlayered and match its selectors
- * (`:root, .swc-theme`) to win by source order.
+ * Loaded after @adobe/spectrum-wc/swc.css. SWC's tokens are unlayered and
+ * declared on `:root, .swc-theme`, so overrides match those selectors and win
+ * by source order. Derived SWC tokens resolve where they are declared, so
+ * component-layer overrides point at semantic tokens on the same selector.
  */
+
+/* ---------------------------------------------------------------------------
+ * Core: design language. Raw values only; never used by components.
+ * ------------------------------------------------------------------------ */
+:root,
+.swc-theme {
+  /* Mixed, not Wada */
+  --mix-blush: #f8f4f0;
+
+  /* Sanzo Wada, Vol. 2 · 030 v2 */
+  --wada-deep-slate-green: #112f2c;
+  --wada-blackish-olive: #42533e;
+  --wada-artemisia-green: #709390;
+  --wada-light-green-yellow: #c7d14f;
+  --wada-cameo-pink: #e0b3b6;
+  --wada-english-red: #d96629;
+  --wada-orange-citrine: #986f2d;
+}
+
+/* ---------------------------------------------------------------------------
+ * Semantic: platform. Meaning, with light/dark pairs.
+ * ------------------------------------------------------------------------ */
+:root,
+.swc-theme {
+  --casey-ground: light-dark(var(--mix-blush), var(--wada-deep-slate-green));
+  --casey-ink: light-dark(var(--wada-deep-slate-green), var(--mix-blush));
+  --casey-rule: var(--casey-ink);
+
+  /* Display emphasis (the bold payoff) */
+  --casey-stress-top: light-dark(var(--wada-blackish-olive), var(--wada-light-green-yellow));
+  --casey-stress-end: light-dark(var(--wada-cameo-pink), var(--wada-blackish-olive));
+
+  /* One job per accent */
+  --casey-structure: var(--wada-orange-citrine); /* large text and graphics only */
+  --casey-data: var(--wada-english-red);
+  --casey-tag: var(--wada-light-green-yellow);
+  --casey-tag-ink: var(--wada-deep-slate-green);
+
+  /* Fields: background / ink */
+  --casey-field-band: var(--wada-artemisia-green);
+  --casey-field-band-ink: var(--wada-deep-slate-green);
+  --casey-field-work: light-dark(var(--wada-light-green-yellow), var(--wada-blackish-olive));
+  --casey-field-work-ink: light-dark(var(--wada-deep-slate-green), var(--mix-blush));
+  --casey-field-work-meter: light-dark(var(--wada-deep-slate-green), var(--wada-light-green-yellow));
+  --casey-field-foot: light-dark(var(--wada-deep-slate-green), var(--wada-cameo-pink));
+  --casey-field-foot-ink: light-dark(var(--mix-blush), var(--wada-deep-slate-green));
+
+  --casey-focus: light-dark(var(--wada-deep-slate-green), var(--wada-light-green-yellow));
+
+  /* Type */
+  --casey-font-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
+  --casey-font-ui: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
+  --casey-font-mono: var(--font-martian), "Martian Mono", ui-monospace, monospace;
+
+  --casey-weight-setup: 200;
+  --casey-weight-stress: 800;
+
+  --casey-tracking-display: -0.02em; /* ≥ 96px */
+  --casey-tracking-heading: -0.01em; /* 40–95px */
+  --casey-tracking-eyebrow: 0.08em;
+
+  --casey-leading-display: 0.93; /* ≥ 96px */
+  --casey-leading-heading: 1.04; /* < 96px */
+  --casey-leading-body: 1.65;
+
+  /* Fluid sizes, 390px → 1440px (DESIGN.md › Fluid sizes) */
+  --casey-size-hero: clamp(6.9375rem, 2.83rem + 16.86vw, 18rem);
+  --casey-size-work-hero: clamp(6.25rem, 2.31rem + 16.19vw, 16.875rem);
+  --casey-size-post-title: clamp(4.125rem, 0.78rem + 13.71vw, 13.125rem);
+  --casey-size-band: clamp(4.75rem, 2.15rem + 10.67vw, 11.75rem);
+  --casey-size-section: clamp(4rem, 2.51rem + 6.1vw, 8rem);
+  --casey-size-statement: clamp(3.25rem, 1.39rem + 7.62vw, 8.25rem);
+  --casey-size-next: clamp(2.125rem, 0.69rem + 5.9vw, 6rem);
+  --casey-size-list-title: clamp(1.5rem, 0.2rem + 5.33vw, 5rem);
+  --casey-size-h2: clamp(2rem, 1.54rem + 1.9vw, 3.25rem);
+  --casey-size-body: clamp(1.125rem, 1.08rem + 0.19vw, 1.25rem);
+  --casey-size-eyebrow: 0.875rem;
+
+  /* Space and grid */
+  --casey-space-section: var(--swc-spacing-700); /* 48 */
+  --casey-space-heading: var(--swc-spacing-300); /* 16 */
+  --casey-space-row: var(--swc-spacing-400); /* 24 */
+  --casey-page-margin: 15px;
+  --casey-content-inset: var(--swc-spacing-300); /* 16; content edge at 31 on mobile */
+  --casey-columns: 4;
+  --casey-rule-width: 1px;
+}
+
+@media (min-width: 768px) {
+  :root,
+  .swc-theme {
+    --casey-space-section: var(--swc-spacing-800); /* 64 */
+    --casey-space-heading: var(--swc-spacing-400); /* 24 */
+    --casey-page-margin: var(--swc-spacing-700); /* 48 */
+    --casey-content-inset: var(--swc-spacing-400); /* 24 */
+    --casey-columns: 12;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Component: implementation. SWC hooks pointed at semantic tokens.
+ * ------------------------------------------------------------------------ */
+:root,
+.swc-theme {
+  /* Surfaces and text */
+  --swc-application-background: var(--casey-ground);
+  --swc-background-base-color: var(--casey-ground);
+  --swc-background-layer-1-color: var(--casey-ground);
+  --swc-background-layer-2-color: var(--casey-ground);
+  --swc-body-color: var(--casey-ink);
+  --swc-heading-color: var(--casey-ink);
+  --swc-neutral-content-color-default: var(--casey-ink);
+  --swc-neutral-subdued-content-color-default: var(--casey-ink);
+
+  /* Accent: ink-filled actions, never Spectrum blue */
+  --swc-accent-background-color-default: var(--casey-ink);
+  --swc-accent-background-color-hover: light-dark(var(--wada-blackish-olive), var(--wada-light-green-yellow));
+  --swc-accent-background-color-down: light-dark(var(--wada-blackish-olive), var(--wada-light-green-yellow));
+  --swc-accent-background-color-key-focus: light-dark(var(--wada-blackish-olive), var(--wada-light-green-yellow));
+  --swc-accent-content-color-default: var(--casey-ink);
+
+  /* Focus */
+  --swc-focus-indicator-color: var(--casey-focus);
+
+  /* Type */
+  --swc-sans-font-family-stack: var(--casey-font-ui);
+  --swc-body-font-family: var(--casey-font-ui);
+  --swc-detail-font-family: var(--casey-font-ui);
+  --swc-heading-font-family: var(--casey-font-display);
+  --swc-title-font-family: var(--casey-font-display);
+  --swc-code-font-family-stack: var(--casey-font-mono);
+
+  /* Gridhouse is square */
+  --swc-badge-corner-radius: 0;
+}
+
+/*
+ * SWC gen2 sets accent button text to rgb(255, 255, 255) on :host, which is
+ * pure white and ignores theme. Host-element styles from the page win over
+ * :host, so the brand sets it here. Tracked in swc-gen2-beta-issues.
+ */
+swc-button[variant="accent"] {
+  --swc-button-content-color-default: var(--casey-ground);
+  --swc-button-content-color-hover: var(--casey-ground);
+  --swc-button-content-color-down: var(--casey-ground);
+  --swc-button-content-color-focus: var(--casey-ground);
+}
+
+swc-badge {
+  --swc-badge-corner-radius: 0;
+}
