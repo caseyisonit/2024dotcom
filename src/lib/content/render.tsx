@@ -1,6 +1,8 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { compileMDX } from "next-mdx-remote/rsc";
 
+import { LayersDiagram } from "@/components/LayersDiagram";
+
 import { headingId } from "./text";
 
 function textOf(node: ReactNode): string {
@@ -17,6 +19,7 @@ function textOf(node: ReactNode): string {
  * (for example `<swc-badge>`), which pass through as custom elements.
  */
 const components = {
+  LayersDiagram,
   h2: ({ children, ...props }: ComponentPropsWithoutRef<"h2">) => (
     <h2 id={headingId(textOf(children))} className="headline headline--heading prose-h2" {...props}>
       {children}

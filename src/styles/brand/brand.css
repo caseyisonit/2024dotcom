@@ -55,6 +55,16 @@
 
   --casey-focus: light-dark(var(--wada-deep-slate-green), var(--wada-light-green-yellow));
 
+  /* Post image generator: every accent, stepped in reading order. Dark mode
+     swaps Blackish Olive and ink for Blush, which would vanish on the ground. */
+  --casey-gen-0: var(--wada-english-red);
+  --casey-gen-1: var(--wada-light-green-yellow);
+  --casey-gen-2: var(--wada-cameo-pink);
+  --casey-gen-3: var(--wada-orange-citrine);
+  --casey-gen-4: var(--wada-artemisia-green);
+  --casey-gen-5: light-dark(var(--wada-blackish-olive), var(--mix-blush));
+  --casey-gen-6: light-dark(var(--wada-deep-slate-green), var(--mix-blush));
+
   /* Type */
   --casey-font-display: var(--font-bricolage), "Bricolage Grotesque", system-ui, sans-serif;
   --casey-font-ui: var(--font-hanken), "Hanken Grotesk", system-ui, sans-serif;
@@ -129,6 +139,13 @@
 
   /* Focus */
   --swc-focus-indicator-color: var(--casey-focus);
+  --swc-link-focus-indicator-color: var(--casey-focus);
+
+  /* Links take the color of their surface (ink on ground, field ink on fields) */
+  --swc-link-text-color-default: currentColor;
+  --swc-link-text-color-hover: currentColor;
+  --swc-link-text-color-down: currentColor;
+  --swc-link-text-color-focus: currentColor;
 
   /* Type */
   --swc-sans-font-family-stack: var(--casey-font-ui);
@@ -156,4 +173,6 @@ swc-button[variant="accent"] {
 
 swc-badge {
   --swc-badge-corner-radius: 0;
+  --swc-badge-background-color: var(--casey-tag);
+  --swc-badge-label-icon-color: var(--casey-tag-ink);
 }

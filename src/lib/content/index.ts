@@ -1,7 +1,7 @@
 import { cache } from "react";
 
 import { markdownSource } from "./markdown-source";
-import { FOCUS_AREAS, type ContentSource, type FocusArea, type Post, type Role } from "./types";
+import { FOCUS_AREAS, TOPICS, type ContentSource, type FocusArea, type Post, type Role } from "./types";
 
 export * from "./types";
 export { stripEmphasis } from "./text";
@@ -66,4 +66,18 @@ export async function getYearsByFocus(now = new Date()): Promise<{ area: FocusAr
 
 export async function getCurrentRole() {
   return (await getRoles()).find((r) => !r.end);
+}
+
+export function topicSlug(topic: string) {
+  return topic.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+const dateFormat = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+
+export function formatDate(iso: string) {
+  return dateFormat.format(new Date(`${iso}T00:00:00Z`));
+}
+
+export function topicFromSlug(slug: string) {
+  return TOPICS.find((t) => topicSlug(t) === slug);
 }

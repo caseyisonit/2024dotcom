@@ -119,10 +119,12 @@ main > .section:first-child {
 }
 
 .cell {
+  grid-column: 1 / -1;
   padding: var(--casey-space-section) var(--casey-content-inset);
 }
 
-.cell + .cell {
+/* Column lines: `.col-line` draws the rule on a cell's inline start. */
+.col-line {
   border-inline-start: var(--casey-rule-width) solid var(--casey-rule);
 }
 
@@ -318,12 +320,8 @@ main > .section:first-child {
 
 @media (forced-colors: active) {
   .section,
-  .cell + .cell,
+  .col-line,
   .site-header {
     border-color: CanvasText;
   }
-}
-
-.hero-title {
-  font-size: var(--casey-size-hero);
 }

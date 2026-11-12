@@ -6,6 +6,7 @@ import "@adobe/spectrum-wc/typography.css";
 import "@adobe/spectrum-wc/link.css";
 import "@/styles/brand/brand.css";
 import "./globals.css";
+import "@/styles/site.css";
 
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";

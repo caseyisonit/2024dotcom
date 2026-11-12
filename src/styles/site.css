@@ -1,0 +1,865 @@
+/*
+ * Page and component styles. Tokens come from brand.css; layout rules follow
+ * DESIGN.md › Space and grid and Grid lines.
+ *
+ * Mobile first: cells stack on 4 columns and column lines are added only
+ * where the 12-column layout puts cells side by side.
+ */
+
+:root {
+  --rule: var(--casey-rule-width) solid var(--casey-rule);
+}
+
+/* ---------------------------------------------------------------------------
+ * Shared text
+ * ------------------------------------------------------------------------ */
+.meta {
+  margin: 0;
+  font-family: var(--casey-font-mono);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.dek {
+  margin: 0;
+  max-inline-size: 40ch;
+  font-size: clamp(1.25rem, 1.11rem + 0.57vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.structure {
+  color: var(--casey-structure);
+}
+
+.panel-strong {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.swc-Link:has(> swc-icon-chevron-right) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--swc-spacing-75);
+}
+
+/* ---------------------------------------------------------------------------
+ * Display sizes
+ * ------------------------------------------------------------------------ */
+/*
+ * Heroes that share a row with the aside size to their column, not the
+ * viewport: Figma keeps "is on it:" on one line at every width (≈34% of the
+ * column at 390 and at 1440).
+ */
+.hero-text {
+  container-type: inline-size;
+}
+
+.hero-title {
+  font-size: min(33.5cqi, 18rem);
+}
+
+/* Full-width hero: three lines on mobile, two from 768px ("[N] yrs on it."). */
+.work-title {
+  font-size: min(30cqi, 6.25rem);
+}
+
+@media (min-width: 768px) {
+  .work-title {
+    font-size: min(20.8cqi, 16.875rem);
+  }
+}
+
+.post-title {
+  font-size: min(21cqi, 13.125rem);
+}
+
+.section-title {
+  margin: 0;
+  font-size: var(--casey-size-section);
+}
+
+.list-title {
+  font-size: var(--casey-size-list-title);
+}
+
+.next-title {
+  font-size: var(--casey-size-next);
+}
+
+/* Below 96px the display line height opens up (DESIGN.md › Type). */
+.list-title,
+.next-title,
+.section-title {
+  line-height: var(--casey-leading-heading);
+}
+
+/* ---------------------------------------------------------------------------
+ * Hero
+ * ------------------------------------------------------------------------ */
+.hero-text {
+  display: grid;
+  align-content: start;
+  gap: var(--casey-space-heading);
+  padding-block-start: var(--casey-space-heading);
+}
+
+.hero-aside {
+  display: none;
+  padding: 0;
+}
+
+.panel {
+  display: grid;
+  gap: var(--swc-spacing-100);
+  padding: var(--casey-space-heading) var(--casey-content-inset);
+}
+
+.panel + .panel {
+  border-block-start: var(--rule);
+}
+
+.panel-list {
+  display: grid;
+  gap: var(--swc-spacing-75);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 700;
+}
+
+.panel-list .swc-Link,
+.panel .swc-Link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.panel .swc-Link:hover {
+  text-decoration: underline;
+}
+
+.hero-panels {
+  display: grid;
+  grid-column: 1 / -1;
+  margin-inline: calc(-1 * var(--casey-page-margin));
+  padding-inline: var(--casey-page-margin);
+  border-block-start: var(--rule);
+}
+
+.hero-panels > .cell {
+  grid-column: auto;
+}
+
+.hero-panels .cell {
+  padding-block: var(--casey-space-heading) var(--casey-space-section);
+}
+
+.hero-panels .cell + .cell {
+  border-block-start: var(--rule);
+}
+
+@media (min-width: 768px) {
+  .hero-text {
+    grid-column: 1 / 9;
+  }
+
+  .hero-text--full {
+    grid-column: 1 / -1;
+  }
+
+  /* Panel rules run to the page edge, like every other rule. */
+  .hero-aside {
+    display: block;
+    grid-column: 9 / -1;
+    margin-inline-end: calc(-1 * var(--casey-page-margin));
+    border-inline-start: var(--rule);
+  }
+
+  .hero-panels {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-panels .cell + .cell {
+    border-block-start: 0;
+    border-inline-start: var(--rule);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Fields (filled bands)
+ * ------------------------------------------------------------------------ */
+.band {
+  --casey-focus: var(--casey-field-band-ink);
+
+  display: grid;
+  gap: var(--casey-space-heading);
+  padding: var(--casey-space-heading) calc(var(--casey-page-margin) + var(--casey-content-inset));
+  background: var(--casey-field-band);
+  color: var(--casey-field-band-ink);
+}
+
+/* Every phrase sits in the same grid cell, so the band keeps the height of
+   the longest one and never jumps when it rotates. */
+.band-phrases {
+  display: grid;
+}
+
+.band-phrases > * {
+  grid-area: 1 / 1;
+}
+
+.band-phrases > [aria-hidden="true"] {
+  visibility: hidden;
+}
+
+.band-phrase {
+  margin: 0;
+  font-size: var(--casey-size-band);
+  line-height: 0.9;
+  letter-spacing: var(--casey-tracking-display);
+}
+
+.band-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--swc-spacing-200) var(--swc-spacing-400);
+}
+
+.band swc-action-button {
+  --swc-action-button-content-color-default: var(--casey-field-band-ink);
+  --swc-action-button-content-color-hover: var(--casey-field-band-ink);
+}
+
+.band-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--swc-spacing-75);
+  color: inherit;
+  font-weight: 700;
+}
+
+.work.field {
+  --casey-focus: var(--casey-field-work-ink);
+
+  background: var(--casey-field-work);
+  color: var(--casey-field-work-ink);
+}
+
+.work.field .swc-Link {
+  color: inherit;
+}
+
+/* Fields are their own border: no column lines inside a filled band. */
+.field .section-header-aside {
+  border-inline-start: 0;
+}
+
+/* ---------------------------------------------------------------------------
+ * Intro
+ * ------------------------------------------------------------------------ */
+.intro-eyebrow {
+  padding-block-end: 0;
+}
+
+.intro-text {
+  margin: 0;
+  padding-block-start: var(--casey-space-heading);
+  font-size: clamp(1.375rem, 1.05rem + 1.33vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.intro-text.prose {
+  font-size: clamp(1.25rem, 1.11rem + 0.57vw, 1.625rem);
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .intro-eyebrow {
+    grid-column: 1 / 4;
+    padding-block-end: var(--casey-space-section);
+  }
+
+  .intro-text {
+    grid-column: 4 / -1;
+    padding-block-start: var(--casey-space-section);
+    border-inline-start: var(--rule);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Section headers
+ * ------------------------------------------------------------------------ */
+.section-header-title {
+  display: grid;
+  gap: var(--swc-spacing-100);
+  padding-block-end: var(--casey-space-heading);
+}
+
+.section-header-aside {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--swc-spacing-200);
+  padding-block-start: 0;
+  padding-block-end: var(--casey-space-heading);
+  font-weight: 700;
+}
+
+.legend {
+  font-weight: 400;
+}
+
+.legend-dot,
+.legend-bar {
+  display: inline-block;
+  background: var(--casey-data);
+  vertical-align: middle;
+}
+
+.legend-dot {
+  inline-size: 0.75em;
+  block-size: 0.75em;
+  border-radius: 50%;
+}
+
+.legend-bar {
+  inline-size: 1.5em;
+  block-size: 0.375em;
+}
+
+@media (min-width: 768px) {
+  .section-header-title {
+    grid-column: 1 / 9;
+  }
+
+  .section-header-aside {
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+    grid-column: 9 / -1;
+    padding-block-start: var(--casey-space-section);
+    border-inline-start: var(--rule);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Post list (Writing)
+ * ------------------------------------------------------------------------ */
+.post-list,
+.role-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post-row,
+.role-row {
+  border-block-start: var(--rule);
+}
+
+.post-row > .cell {
+  padding-block: var(--casey-space-row);
+}
+
+.post-index {
+  display: none;
+}
+
+.post-title-cell {
+  grid-column: 1 / 4;
+  padding-block-end: var(--swc-spacing-100);
+}
+
+.post-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.post-link:hover .list-title {
+  text-decoration: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.1em;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--swc-spacing-100) var(--swc-spacing-200);
+  grid-column: 1 / 4;
+  padding-block-start: 0;
+}
+
+.tag-link {
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.post-circle {
+  --circle-max: 74px;
+
+  display: grid;
+  grid-column: 4 / 5;
+  grid-row: 1 / span 2;
+  place-items: center;
+  padding: var(--casey-space-row) var(--swc-spacing-200);
+  border-inline-start: var(--rule);
+}
+
+.reading-circle {
+  inline-size: calc(var(--circle-max) * var(--scale, 1));
+  block-size: auto;
+  fill: var(--casey-data);
+}
+
+.empty {
+  margin: 0;
+}
+
+.post-meta swc-badge,
+.post-meta .meta {
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .post-title-cell {
+    grid-column: 1 / 8;
+    padding-block-end: var(--casey-space-row);
+  }
+
+  .post-meta {
+    flex-direction: column;
+    align-items: start;
+    grid-column: 8 / 11;
+    padding-block-start: var(--casey-space-row);
+    border-inline-start: var(--rule);
+  }
+
+  .post-circle {
+    --circle-max: 108px;
+
+    grid-column: 11 / -1;
+    grid-row: auto;
+  }
+}
+
+/* The index column appears once the row has room for it (Figma: 1440). */
+@media (min-width: 1200px) {
+  .post-index {
+    display: block;
+    grid-column: 1 / 2;
+    font-family: var(--casey-font-mono);
+    font-size: 0.875rem;
+  }
+
+  .post-title-cell {
+    grid-column: 2 / 9;
+    border-inline-start: var(--rule);
+  }
+
+  .post-meta {
+    grid-column: 9 / 11;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Meters (swc-meter): years by focus, tenure
+ * ------------------------------------------------------------------------ */
+.focus-meters {
+  display: grid;
+  gap: var(--casey-space-row);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.meters-cell {
+  display: grid;
+  gap: var(--casey-space-heading);
+  padding-block-start: var(--casey-space-heading);
+}
+
+.work.field swc-meter {
+  --swc-linear-progress-fill-color: var(--casey-field-work-meter);
+  --swc-linear-progress-track-color: color-mix(in srgb, var(--casey-field-work-ink) 28%, transparent);
+  --swc-linear-progress-text-color: var(--casey-field-work-ink);
+  --swc-linear-progress-thickness: 12px;
+  --swc-linear-progress-font-size: 1.125rem;
+
+  inline-size: 100%;
+  font-weight: 700;
+}
+
+swc-meter.tenure {
+  --swc-linear-progress-fill-color: var(--casey-data);
+  --swc-linear-progress-track-color: color-mix(in srgb, var(--casey-ink) 20%, transparent);
+  --swc-linear-progress-text-color: var(--casey-ink);
+  --swc-linear-progress-thickness: 6px;
+
+  inline-size: 100%;
+}
+
+/* ---------------------------------------------------------------------------
+ * Roles (Work)
+ * ------------------------------------------------------------------------ */
+.role-row > .cell {
+  padding-block: var(--casey-space-row);
+}
+
+.role-row > .cell + .cell {
+  padding-block-start: 0;
+}
+
+.role-dates {
+  display: grid;
+  gap: var(--swc-spacing-100);
+}
+
+.role-title {
+  margin: 0;
+  font-size: var(--casey-size-h2);
+}
+
+.role-highlights {
+  display: grid;
+  gap: var(--swc-spacing-100);
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  list-style: none;
+}
+
+.role-highlights li::before {
+  content: "";
+  display: inline-block;
+  inline-size: 0.5em;
+  block-size: 0.5em;
+  margin-inline-end: 0.5em;
+  background: var(--casey-structure);
+  vertical-align: middle;
+}
+
+.role-focus ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--swc-spacing-100) var(--swc-spacing-300);
+  margin: var(--swc-spacing-100) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.875rem;
+}
+
+/* Four columns need the full 12-column width; below 1200px roles stack. */
+@media (min-width: 1200px) {
+  .role-row > .cell + .cell {
+    padding-block-start: var(--casey-space-row);
+    border-inline-start: var(--rule);
+  }
+
+  .role-dates {
+    grid-column: 1 / 3;
+  }
+
+  .role-name {
+    grid-column: 3 / 7;
+  }
+
+  .role-highlights {
+    grid-column: 7 / 11;
+  }
+
+  .role-focus {
+    grid-column: 11 / -1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Post
+ * ------------------------------------------------------------------------ */
+.post-header .hero-text {
+  grid-row: 2;
+  padding-block-end: var(--casey-space-section);
+}
+
+.post-meta-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--swc-spacing-200);
+  margin: 0;
+}
+
+.draft-notice {
+  justify-self: start;
+  margin: 0;
+  padding: var(--swc-spacing-75) var(--swc-spacing-200);
+  border: var(--rule);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.hero-media {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin-inline: calc(-1 * var(--casey-page-margin));
+  border-block-end: var(--rule);
+}
+
+.post-image {
+  display: block;
+  inline-size: 100%;
+}
+
+.post-image svg {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.post-image-grid line {
+  stroke: var(--casey-rule);
+  stroke-width: 1px;
+  vector-effect: non-scaling-stroke;
+}
+
+.post-image--full {
+  display: none;
+}
+
+/*
+ * The full composition sits beside the title once the column is tall enough
+ * to hold it (≥ 1200px). Below that, the densest row runs as a strip on top.
+ * The image's bottom edge draws a rule (overlapping the next section's rule
+ * by 1px when they meet) so it never floats.
+ */
+@media (min-width: 1200px) {
+  .post-header .hero-text {
+    grid-column: 1 / 10;
+    grid-row: 1;
+  }
+
+  .hero-media {
+    grid-column: 10 / -1;
+    align-self: start;
+    margin-inline-start: 0;
+    margin-block-end: -1px;
+    border-inline-start: var(--rule);
+  }
+
+  .post-image--full {
+    display: block;
+  }
+
+  .post-image--strip {
+    display: none;
+  }
+}
+
+.post-body {
+  border-block-start: var(--rule);
+}
+
+.toc-cell {
+  padding-block-end: 0;
+}
+
+.anchor-menu ul {
+  display: grid;
+  gap: var(--swc-spacing-100);
+  margin: var(--swc-spacing-200) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.anchor-menu a {
+  display: block;
+  padding-inline-start: var(--swc-spacing-200);
+  border-inline-start: 2px solid var(--casey-ink);
+  color: inherit;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.anchor-menu a[aria-current] {
+  border-inline-start: 6px solid var(--casey-structure);
+  font-weight: 700;
+}
+
+.anchor-menu a:hover {
+  text-decoration: underline;
+}
+
+.prose {
+  max-inline-size: 46rem;
+}
+
+.prose > * {
+  margin-block: 0;
+}
+
+.prose > * + * {
+  margin-block-start: var(--casey-space-heading);
+}
+
+.prose p {
+  font-size: var(--casey-size-body);
+  line-height: var(--casey-leading-body);
+}
+
+.prose-h2 {
+  color: var(--casey-structure);
+  font-size: var(--casey-size-h2);
+  scroll-margin-block-start: var(--casey-space-section);
+}
+
+.prose > .prose-h2:not(:first-child) {
+  margin-block-start: var(--casey-space-section);
+}
+
+.prose a {
+  color: inherit;
+}
+
+/* Pull quote: full-bleed band while the text stays on the prose column. */
+.pull-quote {
+  --casey-focus: var(--casey-field-band-ink);
+
+  margin: var(--casey-space-section) 0 !important;
+  padding-block: var(--casey-space-section);
+  background: var(--casey-field-band);
+  color: var(--casey-field-band-ink);
+  box-shadow: 0 0 0 100vmax var(--casey-field-band);
+  clip-path: inset(0 -100vmax);
+}
+
+.pull-quote blockquote {
+  margin: 0;
+}
+
+.pull-quote p {
+  margin: 0;
+  font-family: var(--casey-font-display);
+  font-size: var(--casey-size-h2);
+  font-weight: var(--casey-weight-setup);
+  line-height: var(--casey-leading-heading);
+  letter-spacing: var(--casey-tracking-heading);
+}
+
+.code-block {
+  overflow-x: auto;
+  padding: var(--swc-spacing-400);
+  background: var(--casey-ink);
+  color: var(--casey-ground);
+  font-family: var(--casey-font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.prose :not(pre) > code {
+  font-family: var(--casey-font-mono);
+  font-size: 0.875em;
+}
+
+.layers-diagram {
+  display: grid;
+  gap: var(--casey-space-row);
+  margin-inline: 0;
+}
+
+.layers-cell {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: var(--swc-spacing-400);
+}
+
+.layers-cell svg {
+  inline-size: 100%;
+}
+
+.layers-cell figcaption {
+  display: grid;
+  gap: var(--swc-spacing-50);
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.layers-cell code {
+  font-family: var(--casey-font-mono);
+  font-size: 0.8125rem;
+}
+
+@media (min-width: 768px) {
+  .toc-cell {
+    grid-column: 1 / 4;
+    padding-block-end: var(--casey-space-section);
+  }
+
+  .prose {
+    grid-column: 4 / 11;
+  }
+
+  .layers-diagram {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .layers-cell {
+    grid-template-columns: 1fr;
+    align-content: start;
+    align-items: start;
+    justify-items: center;
+    gap: var(--swc-spacing-300);
+    text-align: center;
+  }
+
+  .layers-cell svg {
+    inline-size: 60%;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Next post (shares the footer field; a rule in footer ink separates them)
+ * ------------------------------------------------------------------------ */
+.next-post {
+  --casey-focus: var(--casey-field-foot-ink);
+
+  background: var(--casey-field-foot);
+  color: var(--casey-field-foot-ink);
+}
+
+.next-link {
+  display: grid;
+  gap: var(--casey-space-heading);
+  padding: var(--casey-space-section) calc(var(--casey-page-margin) + var(--casey-content-inset));
+  color: inherit;
+  text-decoration: none;
+}
+
+.next-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--swc-spacing-400);
+}
+
+.next-link:hover .next-title {
+  text-decoration: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.1em;
+}
+
+main:has(> .next-post:last-child) + .site-footer {
+  border-block-start: var(--casey-rule-width) solid var(--casey-field-foot-ink);
+}
+
+.next-row swc-icon-arrow-ui-right {
+  --swc-icon-inline-size: calc(var(--casey-size-next) * 0.6);
+  --swc-icon-block-size: calc(var(--casey-size-next) * 0.6);
+
+  flex: none;
+}

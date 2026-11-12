@@ -26,6 +26,32 @@ export const site = {
     { label: "Email", href: "mailto:caseyisonit@gmail.com" },
   ] satisfies SiteLink[],
 
+  home: {
+    hero: "Casey\nis **on it:**",
+    intro: {
+      eyebrow: "Hi, I’m Casey Eickhoff",
+      text: "I build design systems and maintain Spectrum Web Components. I codify taste — tokens, lint rules, guides — so quality survives scale, teams, and AI agents.",
+    },
+    location: { place: "Colorado Rockies", status: "Open to talk" },
+  },
+
+  /** Rotating phrases in the band under the hero. Each links to its topic. */
+  band: [
+    { phrase: "design systems", topic: "Design systems" },
+    { phrase: "AI, humans at the gates", topic: "AI" },
+    { phrase: "design engineering", topic: "Design engineering" },
+  ],
+
+  work: {
+    /** `{years}` is computed from the earliest role in Notion. */
+    hero: "Working\n{years} yrs **on it.**",
+    dek: "Making products that are functional, accessible, and delightful.",
+  },
+
+  about: {
+    hero: "Hi, I’m **Casey.**",
+  },
+
   footer: {
     statement: "Guaranteed to improve **company culture.**",
   },
